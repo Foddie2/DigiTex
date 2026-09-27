@@ -23,7 +23,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
