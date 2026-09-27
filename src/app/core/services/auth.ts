@@ -21,6 +21,11 @@ export class AuthService {
   private readonly googleClientId =
     '148437308582-s7s39so50nalpo17o7q8oe1u5kjd1imo.apps.googleusercontent.com';
 
+  // 5 Hours Inactivity Duration in Milliseconds (5 * 60 * 60 * 1000)
+  private readonly TIMEOUT_MS = 18_000_000;
+  private timeoutId: any = null;
+  private lastActivityUpdate = 0;
+
   public isLoggedIn = signal<boolean>(false);
   public currentUser = signal<UserProfile | null>(null);
 
@@ -55,7 +60,6 @@ export class AuthService {
     if (!isPlatformBrowser(this.platformId)) return;
 
     try {
-      // Ensure Google Identity Services SDK finishes loading
       if (this.scriptLoadedPromise) {
         await this.scriptLoadedPromise;
       }
@@ -95,7 +99,7 @@ export class AuthService {
 
       const user: UserProfile = {
         id: data.sub,
-        name: data.name || 'TechBytes Customer',
+        name: data.name || 'digitex Customer',
         email: data.email,
         picture: data.picture,
         initials: (data.name || data.email)
@@ -116,26 +120,91 @@ export class AuthService {
     this.currentUser.set(user);
     this.isLoggedIn.set(true);
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('techbytes_customer', JSON.stringify(user));
+      localStorage.setItem('digitex_customer', JSON.stringify(user));
+      this.recordActivity();
+      this.setupActivityListeners();
     }
   }
 
   private restoreSession(): void {
-    const saved = localStorage.getItem('techbytes_customer');
-    if (saved) {
+    const saved = localStorage.getItem('digitex_customer');
+    const lastActiveStr = localStorage.getItem('digitex_last_active');
+
+    if (saved && lastActiveStr) {
+      const lastActive = parseInt(lastActiveStr, 10);
+      const now = Date.now();
+
+      if (now - lastActive >= this.TIMEOUT_MS) {
+        this.logout();
+        return;
+      }
+
       try {
         const user = JSON.parse(saved);
         this.currentUser.set(user);
         this.isLoggedIn.set(true);
+        this.recordActivity();
+        this.setupActivityListeners();
       } catch (e) {
         this.logout();
       }
+    } else {
+      this.logout();
     }
+  }
+
+  private recordActivity(): void {
+    const now = Date.now();
+    this.lastActivityUpdate = now;
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('digitex_last_active', now.toString());
+    }
+    this.startInactivityTimer();
+  }
+
+  private startInactivityTimer(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+    this.timeoutId = setTimeout(() => {
+      this.logout();
+    }, this.TIMEOUT_MS);
+  }
+
+  private onUserActivity = (): void => {
+    if (!this.isLoggedIn()) return;
+
+    const now = Date.now();
+    if (now - this.lastActivityUpdate > 60_000) {
+      this.recordActivity();
+    }
+  };
+
+  private setupActivityListeners(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'];
+    events.forEach((evt) => {
+      window.addEventListener(evt, this.onUserActivity, { passive: true });
+    });
+  }
+
+  private removeActivityListeners(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'];
+    events.forEach((evt) => {
+      window.removeEventListener(evt, this.onUserActivity);
+    });
   }
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('techbytes_customer');
+      localStorage.removeItem('digitex_customer');
+      localStorage.removeItem('digitex_last_active');
+      this.removeActivityListeners();
+    }
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
     }
     this.isLoggedIn.set(false);
     this.currentUser.set(null);
