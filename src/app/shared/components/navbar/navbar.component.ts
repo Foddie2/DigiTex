@@ -88,7 +88,7 @@ import { AuthService } from '../../../core/services/auth';
             <!-- Dark Mode Switcher -->
             <button
               (click)="themeService.toggleDarkMode()"
-              class=" rounded-md hover:bg-transparent dark:hover:bg-transparent transition-colors duration-200 cursor-pointer flex items-center justify-center"
+              class="rounded-md hover:bg-transparent dark:hover:bg-transparent transition-colors duration-200 cursor-pointer flex items-center justify-center"
               [attr.aria-label]="
                 themeService.isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'
               "
@@ -108,7 +108,7 @@ import { AuthService } from '../../../core/services/auth';
       <div
         class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between gap-4 sm:gap-8"
       >
-        <!-- Brand Logo (Rubik Glitch Font) -->
+        <!-- Brand Logo -->
         <a
           routerLink="/"
           class="rubik-glitch-regular text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide flex items-center gap-1 group transition-transform duration-200 active:scale-95"
@@ -126,7 +126,7 @@ import { AuthService } from '../../../core/services/auth';
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             (keyup.enter)="onSearch()"
-            placeholder="Search products, brands, tech categories..."
+            placeholder="Search products, services, tech categories..."
             aria-label="Search Catalog"
             class="w-full bg-slate-100/80 dark:bg-slate-800/80 text-slate-800 dark:text-slate-100 pl-4 pr-11 py-2.5 rounded-full border border-slate-200/80 dark:border-slate-700/60 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-500/20 outline-none text-sm transition-all duration-200 placeholder:text-slate-400"
           />
@@ -140,9 +140,9 @@ import { AuthService } from '../../../core/services/auth';
           </button>
         </div>
 
-        <!-- Action Items: Wishlist, Dynamic Account Profile, Cart Trigger & Mobile Toggle -->
+        <!-- Action Items -->
         <div class="flex items-center gap-1 sm:gap-2">
-          <!-- REACTIVE CUSTOMER ACCOUNT DROPDOWN MENU -->
+          <!-- ACCOUNT DROPDOWN MENU -->
           <div class="relative">
             <button
               (click)="toggleDropdown('account')"
@@ -188,9 +188,8 @@ import { AuthService } from '../../../core/services/auth';
             @if (isAccountOpen()) {
               <div
                 (mouseleave)="isAccountOpen.set(false)"
-                class="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-2xl py-2 z-50 divide-y divide-slate-100 dark:divide-slate-700/60 animate-fadeIn "
+                class="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-2xl py-2 z-50 divide-y divide-slate-100 dark:divide-slate-700/60 animate-fadeIn"
               >
-                <!-- Dynamic Greeting Header -->
                 <div class="px-4 py-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-t-2xl">
                   <p
                     class="text-[11px] font-extrabold uppercase text-blue-600 dark:text-blue-400 tracking-wider"
@@ -211,7 +210,6 @@ import { AuthService } from '../../../core/services/auth';
                   }
                 </div>
 
-                <!-- Action Options -->
                 <div class="py-1">
                   <a
                     routerLink="/account"
@@ -250,7 +248,6 @@ import { AuthService } from '../../../core/services/auth';
                   </a>
                 </div>
 
-                <!-- Dynamic Auth CTA -->
                 <div class="py-2 px-4 bg-slate-50/30 dark:bg-slate-800/30 rounded-b-2xl">
                   @if (authService.isLoggedIn()) {
                     <button
@@ -272,7 +269,7 @@ import { AuthService } from '../../../core/services/auth';
             }
           </div>
 
-          <!-- Shopping Cart Drawer Trigger -->
+          <!-- Shopping Cart Trigger -->
           <button
             (click)="cartService.openDrawer(); closeAllDropdowns()"
             class="relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/80 dark:hover:bg-slate-800 rounded-full transition-all duration-200 cursor-pointer group flex items-center justify-center"
@@ -292,7 +289,7 @@ import { AuthService } from '../../../core/services/auth';
             }
           </button>
 
-          <!-- Mobile Hamburger Menu Button -->
+          <!-- Mobile Hamburger Toggle -->
           <button
             (click)="isMobileOpen.set(!isMobileOpen())"
             class="md:hidden p-2 text-slate-700 dark:text-slate-200 hover:text-blue-600 cursor-pointer rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center"
@@ -310,11 +307,11 @@ import { AuthService } from '../../../core/services/auth';
         aria-label="Primary Catalog Navigation"
       >
         <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center gap-8 h-11">
-          <!-- MEGA MENU DROPDOWN -->
+          <!-- MEGA MENU DROPDOWN (PRODUCT CATALOG) -->
           <div class="relative" (mouseleave)="isMegaOpen.set(false)">
             <button
-              (mouseenter)="isMegaOpen.set(true); isCatOpen.set(false)"
-              (click)="isMegaOpen.set(!isMegaOpen()); isCatOpen.set(false)"
+              (mouseenter)="isMegaOpen.set(true); isCatOpen.set(false); isServicesOpen.set(false)"
+              (click)="toggleDropdown('mega')"
               [attr.aria-expanded]="isMegaOpen()"
               class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors duration-150"
             >
@@ -441,11 +438,96 @@ import { AuthService } from '../../../core/services/auth';
             }
           </div>
 
-          <!-- COMPACT CATEGORIES DROPDOWN MENU -->
+          <!-- SERVICES DROPDOWN MENU (Navigates to /services?category=...) -->
+          <div class="relative flex items-center h-full" (mouseleave)="isServicesOpen.set(false)">
+            <button
+              (mouseenter)="isServicesOpen.set(true); isMegaOpen.set(false); isCatOpen.set(false)"
+              (click)="toggleDropdown('services')"
+              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors"
+            >
+              <span class="material-symbols-outlined text-[18px] text-blue-600 dark:text-blue-500"
+                >design_services</span
+              >
+              <span>Services</span>
+              <span
+                class="material-symbols-outlined text-[16px] transition-transform duration-200"
+                [class.rotate-180]="isServicesOpen()"
+                >expand_more</span
+              >
+            </button>
+
+            @if (isServicesOpen()) {
+              <div
+                class="absolute left-0 top-11 w-72 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl py-2 z-50 animate-fadeIn"
+              >
+                <a
+                  routerLink="/services"
+                  [queryParams]="{ category: 'Software_Development' }"
+                  (click)="isServicesOpen.set(false)"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>💻</span>
+                    <span>Custom Software Dev</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Web, Mobile & API Engineering
+                  </div>
+                </a>
+
+                <a
+                  routerLink="/services"
+                  [queryParams]="{ category: 'Cybersecurity' }"
+                  (click)="isServicesOpen.set(false)"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>🛡️</span>
+                    <span>Cybersecurity Services</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Pen Testing & Security Audits
+                  </div>
+                </a>
+
+                <a
+                  routerLink="/services"
+                  [queryParams]="{ category: 'Consultancy' }"
+                  (click)="isServicesOpen.set(false)"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>💡</span>
+                    <span>IT & Tech Consultancy</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Architecture & Cloud Strategy
+                  </div>
+                </a>
+
+                <a
+                  routerLink="/services"
+                  [queryParams]="{ category: 'Managed_Services' }"
+                  (click)="isServicesOpen.set(false)"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>⚙️</span>
+                    <span>Managed IT Services</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    24/7 Infrastructure & Support
+                  </div>
+                </a>
+              </div>
+            }
+          </div>
+
+          <!-- CATEGORIES DROPDOWN MENU -->
           <div class="relative" (mouseleave)="isCatOpen.set(false)">
             <button
-              (mouseenter)="isCatOpen.set(true); isMegaOpen.set(false)"
-              (click)="isCatOpen.set(!isCatOpen()); isMegaOpen.set(false)"
+              (mouseenter)="isCatOpen.set(true); isMegaOpen.set(false); isServicesOpen.set(false)"
+              (click)="toggleDropdown('cat')"
               [attr.aria-expanded]="isCatOpen()"
               class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors duration-150"
             >
@@ -489,7 +571,7 @@ import { AuthService } from '../../../core/services/auth';
             }
           </div>
 
-          <!-- Primary Nav Direct Links -->
+          <!-- Direct Links -->
           <a
             routerLink="/products"
             routerLinkActive="text-blue-600 dark:text-blue-400 font-bold"
@@ -513,7 +595,6 @@ import { AuthService } from '../../../core/services/auth';
         <div
           class="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 pt-4 pb-6 space-y-5 shadow-2xl animate-fadeIn"
         >
-          <!-- Mobile Search Field -->
           <div class="relative w-full">
             <input
               type="search"
@@ -533,7 +614,6 @@ import { AuthService } from '../../../core/services/auth';
             </button>
           </div>
 
-          <!-- Customer Shortcuts (Mobile) -->
           <div
             class="bg-slate-50 dark:bg-slate-800/60 p-3 rounded-2xl space-y-2 border border-slate-200/60 dark:border-slate-700/60"
           >
@@ -583,7 +663,6 @@ import { AuthService } from '../../../core/services/auth';
             </div>
           </div>
 
-          <!-- Links Stream (Mobile) -->
           <div class="flex flex-col gap-2 font-medium text-slate-700 dark:text-slate-200 text-sm">
             <a
               routerLink="/"
@@ -598,7 +677,36 @@ import { AuthService } from '../../../core/services/auth';
               >Shop Full Catalog</a
             >
             <a
-              routerLink="/new-arrivals"
+              routerLink="/services"
+              [queryParams]="{ category: 'Software_Development' }"
+              (click)="isMobileOpen.set(false)"
+              class="py-2 border-b border-slate-100 dark:border-slate-800"
+              >Software Development</a
+            >
+            <a
+              routerLink="/services"
+              [queryParams]="{ category: 'Cybersecurity' }"
+              (click)="isMobileOpen.set(false)"
+              class="py-2 border-b border-slate-100 dark:border-slate-800"
+              >Cybersecurity Services</a
+            >
+            <a
+              routerLink="/services"
+              [queryParams]="{ category: 'Consultancy' }"
+              (click)="isMobileOpen.set(false)"
+              class="py-2 border-b border-slate-100 dark:border-slate-800"
+              >IT Consultancy</a
+            >
+            <a
+              routerLink="/services"
+              [queryParams]="{ category: 'Managed_Services' }"
+              (click)="isMobileOpen.set(false)"
+              class="py-2 border-b border-slate-100 dark:border-slate-800"
+              >Managed IT Services</a
+            >
+            <a
+              routerLink="/products"
+              [queryParams]="{ features: 'New_Arrivals' }"
               (click)="isMobileOpen.set(false)"
               class="py-2 border-b border-slate-100 dark:border-slate-800"
               >New Arrivals</a
@@ -641,15 +749,17 @@ export class Navbar {
   isMobileOpen = signal<boolean>(false);
   isMegaOpen = signal<boolean>(false);
   isCatOpen = signal<boolean>(false);
+  isServicesOpen = signal<boolean>(false);
   isAccountOpen = signal<boolean>(false);
   isLangOpen = signal<boolean>(false);
   searchQuery = signal<string>('');
 
-  toggleDropdown(type: 'lang' | 'account' | 'mega' | 'cat'): void {
+  toggleDropdown(type: 'lang' | 'account' | 'mega' | 'cat' | 'services'): void {
     this.isLangOpen.set(type === 'lang' ? !this.isLangOpen() : false);
     this.isAccountOpen.set(type === 'account' ? !this.isAccountOpen() : false);
     this.isMegaOpen.set(type === 'mega' ? !this.isMegaOpen() : false);
     this.isCatOpen.set(type === 'cat' ? !this.isCatOpen() : false);
+    this.isServicesOpen.set(type === 'services' ? !this.isServicesOpen() : false);
   }
 
   closeAllDropdowns(): void {
@@ -657,6 +767,7 @@ export class Navbar {
     this.isAccountOpen.set(false);
     this.isMegaOpen.set(false);
     this.isCatOpen.set(false);
+    this.isServicesOpen.set(false);
   }
 
   selectLang(lang: string): void {

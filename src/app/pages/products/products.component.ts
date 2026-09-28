@@ -39,7 +39,7 @@ interface BrandCollection {
           <span
             class="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest"
           >
-            Verified Hardware Collections
+            Verified Hardware & Services Catalog
           </span>
           <h1
             class="text-3xl font-black text-slate-900 dark:text-white capitalize mt-1 tracking-tight"
@@ -47,7 +47,8 @@ interface BrandCollection {
             {{ pageTitle() }}
           </h1>
           <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            Browse genuine inventory grouped by verified tech brands & edge partners.
+            Browse genuine inventory grouped by verified tech brands, hardware drops & edge
+            solutions.
           </p>
         </div>
 
@@ -98,7 +99,7 @@ interface BrandCollection {
                 </div>
               </div>
 
-              <!-- Horizontal Scroll with End Navigation -->
+              <!-- Horizontal Scroll with Navigation Arrows -->
               <div class="relative group/row">
                 <!-- Left Flanking Arrow -->
                 <button
@@ -140,18 +141,18 @@ interface BrandCollection {
                             </p>
                           </div>
                           <div class="pt-6 relative z-10">
-                            <a
-                              routerLink="/cart"
+                            <button
+                              (click)="cartService.openDrawer()"
                               class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
                             >
                               Setup Express Payment →
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </div>
                     }
 
-                    <!-- Isolated Product Card -->
+                    <!-- Product Card -->
                     <div
                       class="w-72 sm:w-80 shrink-0 snap-start transition-all duration-300 transform-gpu hover:-translate-y-1.5 hover:shadow-2xl rounded-3xl"
                     >
@@ -203,7 +204,7 @@ interface BrandCollection {
         >
           <span class="text-6xl block">📡</span>
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">
-            No hardware matches your filter
+            No items match your selected filter
           </h3>
           <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">
             We couldn't find items matching "{{ activeFilter() }}".
@@ -212,7 +213,7 @@ interface BrandCollection {
             (click)="clearFilter()"
             class="mt-4 inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
           >
-            Clear Filters & View Catalog
+            Clear Filters & View Full Catalog
           </button>
         </div>
       }
@@ -246,9 +247,16 @@ interface BrandCollection {
                 @if (activeModalImage()) {
                   <img
                     [src]="getShopifyEdgeOptimizedImage(activeModalImage(), 800)"
-                    [alt]="selectedProduct()?.title"
+                    [alt]="selectedProduct()?.title || 'Product Preview'"
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
+                } @else {
+                  <div
+                    class="text-slate-400 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-4xl">inventory_2</span>
+                    <span>No Preview Image</span>
+                  </div>
                 }
               </div>
 
@@ -289,19 +297,22 @@ interface BrandCollection {
 
               <div class="flex items-baseline gap-4">
                 <span class="text-4xl font-black text-slate-900 dark:text-white">
-                  {{ currencyService.formatPrice(selectedProduct()) }}
+                  {{ currencyService.formatPrice(getProductPrice(selectedProduct())) }}
                 </span>
                 <span
                   class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800/60"
                 >
-                  Ready to Ship
+                  Ready to Dispatch
                 </span>
               </div>
 
               <p
                 class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-h-36 overflow-y-auto pr-2 no-scrollbar"
               >
-                {{ selectedProduct()?.description }}
+                {{
+                  selectedProduct()?.description ||
+                    'Verified DigiTex high-performance hardware release.'
+                }}
               </p>
 
               <!-- Add to Cart CTA -->
@@ -310,9 +321,13 @@ interface BrandCollection {
                 [disabled]="isModalAdding()"
                 class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-blue-600/30 transition-all transform-gpu cursor-pointer active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>{{
-                  isModalAdding() ? 'Syncing to Checkout Vault...' : 'Add Hardware to Cart'
-                }}</span>
+                @if (isModalAdding()) {
+                  <span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
+                  <span>Syncing to Cart...</span>
+                } @else {
+                  <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                  <span>Add Item to Cart</span>
+                }
               </button>
 
               <!-- Safe Payment Trust Bar -->
@@ -364,7 +379,7 @@ interface BrandCollection {
                     class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 p-3 rounded-2xl cursor-pointer hover:border-blue-500 transition-all duration-200 transform-gpu hover:-translate-y-1 group/rel flex gap-3 items-center"
                   >
                     <div
-                      class="w-16 h-16 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-slate-800"
+                      class="w-16 h-16 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-slate-800 flex items-center justify-center"
                     >
                       @if (getModalImages(related)[0]) {
                         <img
@@ -372,6 +387,8 @@ interface BrandCollection {
                           [alt]="related.title"
                           class="w-full h-full object-cover group-hover/rel:scale-105 transition-transform duration-300"
                         />
+                      } @else {
+                        <span class="material-symbols-outlined text-slate-400 text-lg">memory</span>
                       }
                     </div>
                     <div class="overflow-hidden">
@@ -381,7 +398,7 @@ interface BrandCollection {
                         {{ related.title }}
                       </h5>
                       <p class="text-xs font-extrabold text-blue-600 dark:text-blue-400 mt-1">
-                        {{ currencyService.formatPrice(related) }}
+                        {{ currencyService.formatPrice(getProductPrice(related)) }}
                       </p>
                     </div>
                   </div>
@@ -440,8 +457,7 @@ export class ProductsPageComponent implements OnInit {
   pageTitle = signal<string>('All Products');
   activeFilter = signal<string>('');
   brandCollections = signal<BrandCollection[]>([]);
-  activeFeatureFilter = signal<string | null>(null);
-  products = signal<any[]>([]);
+
   selectedProduct = signal<Product | null>(null);
   activeImageIndex = signal<number>(0);
   isModalAdding = signal<boolean>(false);
@@ -454,25 +470,28 @@ export class ProductsPageComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // Listen dynamically to query parameters (e.g. ?features=New_Arrivals)
-    this.route.queryParams.subscribe((params) => {
-      const feature = params['features'];
-      this.activeFeatureFilter.set(feature || null);
-      this.loadProducts(feature);
+    // Dynamically listen to route query params (?category=..., ?features=..., ?q=...)
+    this.route.queryParams.subscribe(async (params) => {
+      const category = params['category'] || null;
+      const feature = params['features'] || null;
+      const q = params['q'] || null;
+
+      await this.fetchAndProcessProducts(category, feature, q);
     });
   }
 
-  async loadProducts(featureFilter?: string): Promise<void> {
+  private async fetchAndProcessProducts(
+    category: string | null,
+    feature: string | null,
+    q: string | null,
+  ): Promise<void> {
     this.isLoading.set(true);
     try {
-      const allProducts = await this.shopifyService.getProducts(20);
-
-      if (featureFilter === 'New_Arrivals') {
-        // Filter or sort by newest items
-        this.products.set([...allProducts].reverse());
-      } else {
-        this.products.set(allProducts);
+      if (this.allProducts().length === 0) {
+        const fetched = await this.shopifyService.getProducts(100);
+        this.allProducts.set(fetched || []);
       }
+      this.applyFilterAndGroup(category, feature, q);
     } catch (err) {
       console.error('Failed to load products catalog:', err);
     } finally {
@@ -480,34 +499,46 @@ export class ProductsPageComponent implements OnInit {
     }
   }
 
-  getShopifyEdgeOptimizedImage(url: string | null, width: number): string {
-    if (!url) return '';
-    if (url.includes('cdn.shopify.com')) {
-      const separator = url.includes('?') ? '&' : '?';
-      return `${url}${separator}width=${width}&crop=center`;
-    }
-    return url;
-  }
-
-  private applyFilterAndGroup(category?: string, query?: string): void {
-    let filtered = this.allProducts();
-    const active = category || query || '';
-    this.activeFilter.set(active);
+  private applyFilterAndGroup(
+    category?: string | null,
+    feature?: string | null,
+    q?: string | null,
+  ): void {
+    let filtered = [...this.allProducts()];
+    const active = category || feature || q || '';
+    this.activeFilter.set(active.replace(/_/g, ' '));
 
     if (category) {
-      this.pageTitle.set(`Category: ${category}`);
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(category.toLowerCase()) ||
-          p.description.toLowerCase().includes(category.toLowerCase()),
-      );
-    } else if (query) {
-      this.pageTitle.set(`Search: "${query}"`);
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query.toLowerCase()) ||
-          p.description.toLowerCase().includes(query.toLowerCase()),
-      );
+      const normalizedCat = category.toLowerCase().replace(/_/g, ' ');
+      this.pageTitle.set(`Category: ${category.replace(/_/g, ' ')}`);
+
+      filtered = filtered.filter((p: any) => {
+        const productType = (p.productType || '').toLowerCase();
+        const tags = (p.tags || []).map((t: string) => t.toLowerCase());
+        const title = (p.title || '').toLowerCase();
+        const desc = (p.description || '').toLowerCase();
+        const vendor = (p.vendor || '').toLowerCase();
+
+        return (
+          productType.includes(normalizedCat) ||
+          tags.some((t: string) => t.includes(normalizedCat)) ||
+          title.includes(normalizedCat) ||
+          desc.includes(normalizedCat) ||
+          vendor.includes(normalizedCat)
+        );
+      });
+    } else if (feature === 'New_Arrivals') {
+      this.pageTitle.set('New Arrivals Catalog');
+      filtered = [...filtered].reverse();
+    } else if (q) {
+      this.pageTitle.set(`Search: "${q}"`);
+      const query = q.toLowerCase();
+      filtered = filtered.filter((p: any) => {
+        const title = (p.title || '').toLowerCase();
+        const desc = (p.description || '').toLowerCase();
+        const vendor = (p.vendor || '').toLowerCase();
+        return title.includes(query) || desc.includes(query) || vendor.includes(query);
+      });
     } else {
       this.pageTitle.set('All Products');
     }
@@ -523,7 +554,7 @@ export class ProductsPageComponent implements OnInit {
       brand,
       products: groups[brand],
       isLoadingMore: false,
-      hasMore: true,
+      hasMore: groups[brand].length >= 4,
     }));
 
     this.brandCollections.set(collections);
@@ -531,16 +562,61 @@ export class ProductsPageComponent implements OnInit {
 
   clearFilter(): void {
     this.activeFilter.set('');
-    this.applyFilterAndGroup();
+    this.applyFilterAndGroup(null, null, null);
   }
 
   getBrandName(product: any): string {
-    if (!product) return 'TechBytes';
+    if (!product) return 'DigiTex Tech';
     if (product.vendor) return product.vendor;
     const title = (product.title || '').toLowerCase();
-    if (title.includes('apple') || title.includes('iphone')) return 'Apple';
+    if (title.includes('apple') || title.includes('iphone') || title.includes('macbook'))
+      return 'Apple';
     if (title.includes('samsung')) return 'Samsung';
+    if (title.includes('dell')) return 'Dell';
+    if (title.includes('hp')) return 'HP';
+    if (title.includes('lenovo')) return 'Lenovo';
     return 'Premium Gear';
+  }
+
+  getShopifyEdgeOptimizedImage(url: string | null, width: number): string {
+    if (!url) return '';
+    if (url.includes('cdn.shopify.com')) {
+      const separator = url.includes('?') ? '&' : '?';
+      return `${url}${separator}width=${width}&crop=center`;
+    }
+    return url;
+  }
+
+  getProductPrice(product: any): any {
+    if (!product) return null;
+    return (
+      product?.variants?.edges?.[0]?.node?.price ||
+      product?.variants?.[0]?.price ||
+      product?.price ||
+      null
+    );
+  }
+
+  getVariantId(product: any): string {
+    if (!product) return '';
+    return (
+      product?.variants?.edges?.[0]?.node?.id || product?.variants?.[0]?.id || product?.id || ''
+    );
+  }
+
+  getModalImages(product: any): string[] {
+    if (!product) return [];
+    if (product.images?.edges && Array.isArray(product.images.edges)) {
+      return product.images.edges
+        .map((edge: any) => edge.node?.url || edge.node?.src)
+        .filter(Boolean);
+    }
+    if (Array.isArray(product.images)) {
+      return product.images
+        .map((img: any) => (typeof img === 'string' ? img : img.src || img.url))
+        .filter(Boolean);
+    }
+    return [];
   }
 
   scrollContainer(index: number, direction: 'left' | 'right'): void {
@@ -580,11 +656,6 @@ export class ProductsPageComponent implements OnInit {
     this.selectedProduct.set(null);
   }
 
-  getModalImages(product: any): string[] {
-    if (!product?.images?.edges) return [];
-    return product.images.edges.map((edge: any) => edge.node.url);
-  }
-
   getRelatedProducts(currentProduct: any): Product[] {
     if (!currentProduct) return [];
     const brand = this.getBrandName(currentProduct);
@@ -594,7 +665,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   async addToCart(product: any): Promise<void> {
-    const variantId = product?.variants?.edges?.[0]?.node?.id || '';
+    const variantId = this.getVariantId(product);
     if (!variantId) return;
 
     this.isModalAdding.set(true);

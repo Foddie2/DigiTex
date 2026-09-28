@@ -15,13 +15,21 @@ export const routes: Routes = [
     title: 'Catalog | DigiTex',
   },
 
-  // FIXED REDIRECT ROUTE: Removed loadComponent & title from this object
+  // SERVICES ROUTE (Loads ProductsPageComponent with Clean /services URL)
+  {
+    path: 'services',
+    loadComponent: () =>
+      import('./pages/products/products.component').then(
+        (m) => m.ProductsPageComponent || (m as any).ProductsComponent,
+      ),
+    title: 'Services | DigiTex',
+  },
+
   {
     path: 'new-arrivals',
     redirectTo: '/products?features=New_Arrivals',
     pathMatch: 'full',
   },
-
   {
     path: 'track-order',
     loadComponent: () =>
