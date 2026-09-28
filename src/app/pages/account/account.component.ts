@@ -152,7 +152,7 @@ export interface CustomerOrder {
         <div class="space-y-6">
           @if (!authService.isLoggedIn()) {
             <div
-              class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-emerald-900/40 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              class="bg-linear-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-emerald-900/40 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
             >
               <div class="space-y-1.5 max-w-xl">
                 <span
