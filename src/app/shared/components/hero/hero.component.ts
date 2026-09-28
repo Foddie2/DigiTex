@@ -33,7 +33,7 @@ interface HeroSlide {
       <!-- Ambient Background Glows -->
       <div
         aria-hidden="true"
-        class="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/20 rounded-full blur-3xl pointer-events-none"
+        class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"
       ></div>
       <div
         aria-hidden="true"
@@ -52,8 +52,8 @@ interface HeroSlide {
                 <button
                   (click)="setSlide($index)"
                   [class.w-6]="currentIndex() === $index"
-                  [class.bg-blue-600]="currentIndex() === $index"
-                  [class.dark:bg-blue-500]="currentIndex() === $index"
+                  [class.bg-emerald-600]="currentIndex() === $index"
+                  [class.dark:bg-emerald-500]="currentIndex() === $index"
                   [class.w-2]="currentIndex() !== $index"
                   [class.bg-slate-300]="currentIndex() !== $index"
                   [class.dark:bg-slate-700]="currentIndex() !== $index"
@@ -82,7 +82,7 @@ interface HeroSlide {
                 >
                   {{ slide.headline }}
                   <span
-                    class="block text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-indigo-500 to-sky-600 dark:from-blue-400 dark:via-indigo-300 dark:to-sky-400 mt-1"
+                    class="block text-transparent bg-clip-text bg-linear-to-r from-emerald-600 via-indigo-500 to-sky-600 dark:from-emerald-400 dark:via-indigo-300 dark:to-sky-400 mt-1"
                   >
                     {{ slide.highlightText }}
                   </span>
@@ -104,7 +104,7 @@ interface HeroSlide {
           >
             <a
               href="#featured-products"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 text-md"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-600/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 text-md"
             >
               <span>Explore more Products</span>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,7 +162,7 @@ interface HeroSlide {
             <!-- Glow Outline -->
             <div
               aria-hidden="true"
-              class="absolute -inset-1 bg-linear-to-r from-blue-500 to-indigo-500 rounded-3xl blur opacity-25 dark:opacity-30"
+              class="absolute -inset-1 bg-linear-to-r from-emerald-500 to-indigo-500 rounded-3xl blur opacity-25 dark:opacity-30"
             ></div>
 
             <!-- CSS Grid Overlay Product Card Stack -->
@@ -200,7 +200,7 @@ interface HeroSlide {
                           }
 
                           <span
-                            class="absolute top-3 right-3 bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow z-10"
+                            class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow z-10"
                           >
                             Top Pick #{{ $index + 1 }}
                           </span>
@@ -241,7 +241,7 @@ interface HeroSlide {
                             <button
                               (click)="addToCart(getVariantId(slide.product))"
                               [disabled]="isAdding()"
-                              class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold text-xs px-5 py-3 rounded-lg shadow-md transition cursor-pointer"
+                              class="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs px-5 py-3 rounded-lg shadow-md transition cursor-pointer"
                             >
                               {{ isAdding() ? 'Adding...' : 'Add to Cart' }}
                             </button>

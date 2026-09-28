@@ -19,7 +19,7 @@ import { RouterLink } from '@angular/router';
             <h3
               class="text-xl font-bold text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-2"
             >
-              <span class="material-symbols-outlined text-blue-600 dark:text-blue-400"
+              <span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400"
                 >mark_email_unread</span
               >
               <span>Subscribe to Tech Alerts</span>
@@ -36,11 +36,11 @@ import { RouterLink } from '@angular/router';
                   type="email"
                   required
                   placeholder="Enter your email"
-                  class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white outline-none focus:border-blue-500 flex-1 min-w-60"
+                  class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-500 flex-1 min-w-60"
                 />
                 <button
                   type="submit"
-                  class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition cursor-pointer flex items-center gap-1.5 shrink-0"
+                  class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition cursor-pointer flex items-center gap-1.5 shrink-0"
                 >
                   <span>Subscribe</span>
                   <span class="material-symbols-outlined text-[18px]">send</span>
@@ -67,7 +67,7 @@ import { RouterLink } from '@angular/router';
               class="rubik-glitch-regular text-3xl text-slate-900 dark:text-white tracking-wide flex items-center gap-1 group transition-transform duration-200 active:scale-95"
               aria-label="DigiTex E-Commerce Home"
             >
-              <span class="text-blue-600 dark:text-blue-500">Digi</span>Tex
+              <span class="text-emerald-600 dark:text-emerald-500">Digi</span>Tex
             </a>
             <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
               Your destination for high-performance electronics and verified accessories. Synced
@@ -80,7 +80,7 @@ import { RouterLink } from '@angular/router';
                 href="https://x.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition"
+                class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition"
                 title="Follow on X"
               >
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -108,7 +108,7 @@ import { RouterLink } from '@angular/router';
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition"
+                class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition"
                 title="Follow on Facebook"
               >
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -127,7 +127,7 @@ import { RouterLink } from '@angular/router';
                 <span>256-Bit SSL Encrypted</span>
               </span>
               <span
-                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
               >
                 <span class="material-symbols-outlined text-[16px]">local_shipping</span>
                 <span>Tracked Express Shipping</span>
@@ -145,7 +145,7 @@ import { RouterLink } from '@angular/router';
                 <a
                   routerLink="/products"
                   [queryParams]="{ category: 'Laptops' }"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Laptops</a
                 >
               </li>
@@ -153,7 +153,7 @@ import { RouterLink } from '@angular/router';
                 <a
                   routerLink="/products"
                   [queryParams]="{ category: 'Smartphones' }"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Smartphones</a
                 >
               </li>
@@ -161,7 +161,7 @@ import { RouterLink } from '@angular/router';
                 <a
                   routerLink="/products"
                   [queryParams]="{ category: 'Headphones' }"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Headphones</a
                 >
               </li>
@@ -169,7 +169,7 @@ import { RouterLink } from '@angular/router';
                 <a
                   routerLink="/products"
                   [queryParams]="{ category: 'Accessories' }"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Accessories</a
                 >
               </li>
@@ -185,24 +185,30 @@ import { RouterLink } from '@angular/router';
               <li>
                 <a
                   routerLink="/track-order"
-                  class="hover:text-blue-600 dark:hover:text-white transition font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1"
+                  class="hover:text-emerald-600 dark:hover:text-white transition font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1"
                 >
                   <span class="material-symbols-outlined text-[16px]">local_shipping</span>
                   <span>Track Order</span>
                 </a>
               </li>
               <li>
-                <a routerLink="/#faq" class="hover:text-blue-600 dark:hover:text-white transition"
+                <a
+                  routerLink="/#faq"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Shipping Policy</a
                 >
               </li>
               <li>
-                <a routerLink="/#faq" class="hover:text-blue-600 dark:hover:text-white transition"
+                <a
+                  routerLink="/#faq"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >30-Day Money Back</a
                 >
               </li>
               <li>
-                <a routerLink="/#faq" class="hover:text-blue-600 dark:hover:text-white transition"
+                <a
+                  routerLink="/#faq"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Help Center / FAQ</a
                 >
               </li>
@@ -218,21 +224,21 @@ import { RouterLink } from '@angular/router';
               <li>
                 <a
                   routerLink="/privacy-policy"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Privacy Policy</a
                 >
               </li>
               <li>
                 <a
                   routerLink="/terms-of-service"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Terms of Service</a
                 >
               </li>
               <li>
                 <a
                   routerLink="/cookie-policy"
-                  class="hover:text-blue-600 dark:hover:text-white transition"
+                  class="hover:text-emerald-600 dark:hover:text-white transition"
                   >Cookie Policy</a
                 >
               </li>

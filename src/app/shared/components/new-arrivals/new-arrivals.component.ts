@@ -20,7 +20,7 @@ import { CurrencyService } from '../../../core/services/currency';
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
             <span
-              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 mb-3 border border-blue-200 dark:border-blue-900/60"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 mb-3 border border-emerald-200 dark:border-emerald-900/60"
             >
               ⚡ Direct Drop Release
             </span>
@@ -38,7 +38,7 @@ import { CurrencyService } from '../../../core/services/currency';
           <a
             routerLink="/products"
             [queryParams]="{ category: 'New_Arrivals' }"
-            class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors group cursor-pointer"
+            class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors group cursor-pointer"
           >
             <span>Browse All Drops</span>
             <span
@@ -70,14 +70,14 @@ import { CurrencyService } from '../../../core/services/currency';
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             @for (product of products(); track product.id) {
               <div
-                class="group relative bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 rounded-2xl overflow-hidden hover:shadow-xl hover:border-blue-500/40 dark:hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between"
+                class="group relative bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/70 rounded-2xl overflow-hidden hover:shadow-xl hover:border-emerald-500/40 dark:hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <!-- Card Top Image Container -->
                 <div
                   class="relative h-64 w-full bg-white dark:bg-slate-950 overflow-hidden flex items-center justify-center p-4"
                 >
                   <span
-                    class="absolute top-3 left-3 z-10 bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"
+                    class="absolute top-3 left-3 z-10 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"
                   >
                     NEW DROP
                   </span>
@@ -103,7 +103,7 @@ import { CurrencyService } from '../../../core/services/currency';
                 <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
                     <h3
-                      class="text-sm font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                      class="text-sm font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors"
                     >
                       {{ product.title }}
                     </h3>
@@ -132,7 +132,7 @@ import { CurrencyService } from '../../../core/services/currency';
                     <button
                       (click)="addToCart(getVariantId(product))"
                       [disabled]="addingVariantId() === getVariantId(product)"
-                      class="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/20 active:scale-95 transition-all cursor-pointer"
+                      class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
                       title="Add product to cart"
                     >
                       @if (addingVariantId() === getVariantId(product)) {

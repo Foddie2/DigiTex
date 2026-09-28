@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   template: `
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <div class="text-center space-y-2">
-        <span class="text-xs font-black text-blue-600 uppercase tracking-widest"
+        <span class="text-xs font-black text-emerald-600 uppercase tracking-widest"
           >Logistics Hub</span
         >
         <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
@@ -42,7 +42,7 @@ import { ActivatedRoute } from '@angular/router';
           <button
             type="submit"
             [disabled]="isLoading()"
-            class="sm:col-span-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer"
+            class="sm:col-span-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer"
           >
             {{ isLoading() ? 'Searching Waybill Record...' : 'Track Package Status' }}
           </button>
@@ -76,7 +76,7 @@ import { ActivatedRoute } from '@angular/router';
             @for (step of orderResult().timeline; track step.title) {
               <div class="flex items-start gap-3">
                 <div
-                  [class.bg-blue-600]="step.completed"
+                  [class.bg-emerald-600]="step.completed"
                   class="w-4 h-4 rounded-full bg-slate-200 text-white text-[10px] flex items-center justify-center font-bold"
                 >
                   ✓

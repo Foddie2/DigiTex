@@ -57,7 +57,8 @@ export interface BrandLogo {
       <!-- Featured Products (Horizontal Left-to-Right Scroll with Flanking Arrows & Infinite Shimmer) -->
       <section id="featured-products" class="max-w-7xl mx-auto px-4">
         <div class="mb-8">
-          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest"
+          <span
+            class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest"
             >Real-time Catalog</span
           >
           <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
@@ -71,7 +72,7 @@ export interface BrandLogo {
         @if (isLoading()) {
           <div class="text-center py-16 text-slate-500">
             <div
-              class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"
+              class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"
             ></div>
             Syncing catalog...
           </div>
@@ -150,7 +151,7 @@ export interface BrandLogo {
       <!-- Top Selling Items Showcase -->
       <section class="max-w-7xl mx-auto px-4">
         <div
-          class="bg-linear-to-br from-slate-50 via-slate-100/70 to-blue-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-blue-950 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white shadow-xl dark:shadow-2xl transition-colors duration-300"
+          class="bg-linear-to-br from-slate-50 via-slate-100/70 to-emerald-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white shadow-xl dark:shadow-2xl transition-colors duration-300"
         >
           <div
             class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4"
@@ -170,7 +171,7 @@ export interface BrandLogo {
             </div>
             <a
               href="#featured-products"
-              class="text-xs font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors"
+              class="text-xs font-bold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 underline transition-colors"
             >
               View Full Collection →
             </a>
@@ -219,7 +220,7 @@ export interface BrandLogo {
                     <!-- Padded Content Body -->
                     <div class="p-4 space-y-1">
                       <h3
-                        class="font-bold text-slate-900 dark:text-white text-base truncate group-hover/card:text-blue-600 dark:group-hover/card:text-blue-400 transition-colors"
+                        class="font-bold text-slate-900 dark:text-white text-base truncate group-hover/card:text-emerald-600 dark:group-hover/card:text-emerald-400 transition-colors"
                       >
                         {{ product.title }}
                       </h3>
@@ -243,7 +244,7 @@ export interface BrandLogo {
                     </div>
                     <button
                       (click)="$event.stopPropagation(); addProductToCart(product)"
-                      class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer"
+                      class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer"
                     >
                       Quick Add
                     </button>
@@ -271,7 +272,7 @@ export interface BrandLogo {
           class="border-y border-slate-200/80 dark:border-slate-800/80 py-8 px-4 transition-colors duration-300"
         >
           <p
-            class="text-center text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-8"
+            class="text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-8"
           >
             Trusted Hardware Partners & Brands
           </p>
@@ -323,7 +324,7 @@ export interface BrandLogo {
       <section class="bg-slate-100 dark:bg-slate-900 py-16">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div class="space-y-4">
-            <span class="text-sm font-bold text-blue-600 uppercase tracking-widest"
+            <span class="text-sm font-bold text-emerald-600 uppercase tracking-widest"
               >The Problem</span
             >
             <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -364,7 +365,7 @@ export interface BrandLogo {
             @for (product of marqueeProducts(); track $index) {
               <div
                 (click)="openProductModal(product)"
-                class="w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex gap-4 items-center shrink-0 cursor-pointer hover:border-blue-500 transition-all shadow-xs"
+                class="w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex gap-4 items-center shrink-0 cursor-pointer hover:border-emerald-500 transition-all shadow-xs"
               >
                 <div
                   class="w-20 h-20 bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden shrink-0"
@@ -381,7 +382,7 @@ export interface BrandLogo {
                   <h4 class="font-bold text-slate-900 dark:text-white text-sm truncate">
                     {{ product.title }}
                   </h4>
-                  <p class="text-xs font-bold text-blue-600 mt-1">
+                  <p class="text-xs font-bold text-emerald-600 mt-1">
                     {{ currencyService.formatPrice(getProductPrice(product)) }}
                   </p>
                   <span class="text-xs text-slate-500 dark:text-slate-400 underline mt-2 block">
@@ -503,7 +504,7 @@ export interface BrandLogo {
                     <button
                       (click)="activeImageIndex.set($index)"
                       [class.ring-2]="activeImageIndex() === $index"
-                      class="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shrink-0 cursor-pointer ring-blue-600 transition"
+                      class="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shrink-0 cursor-pointer ring-emerald-600 transition"
                     >
                       <img
                         [src]="imgUrl"
@@ -520,7 +521,7 @@ export interface BrandLogo {
             <div class="space-y-5">
               <div>
                 <span
-                  class="inline-block bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2"
+                  class="inline-block bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2"
                 >
                   {{ getBrandName(selectedProduct()) }}
                 </span>
@@ -560,7 +561,7 @@ export interface BrandLogo {
               <button
                 (click)="addProductToCart(selectedProduct())"
                 [disabled]="isModalAdding()"
-                class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition text-sm cursor-pointer flex items-center justify-center gap-2"
+                class="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-emerald-600/30 transition text-sm cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>{{ isModalAdding() ? 'Adding to Cart...' : 'Add to Cart' }}</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -614,7 +615,7 @@ export interface BrandLogo {
               @for (related of getSmartRelatedProducts(selectedProduct()); track related.id) {
                 <div
                   (click)="openProductModal(related)"
-                  class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 p-3 rounded-2xl cursor-pointer hover:border-blue-500 transition group flex gap-3 items-center"
+                  class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 p-3 rounded-2xl cursor-pointer hover:border-emerald-500 transition group flex gap-3 items-center"
                 >
                   <div
                     class="w-16 h-16 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shrink-0"
@@ -631,7 +632,7 @@ export interface BrandLogo {
                     <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate">
                       {{ related.title }}
                     </h5>
-                    <p class="text-xs font-bold text-blue-600 dark:text-blue-400 mt-1">
+                    <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400 mt-1">
                       {{ currencyService.formatPrice(getProductPrice(related)) }}
                     </p>
                   </div>
@@ -824,11 +825,37 @@ export class HomeComponent implements OnInit {
     if (title.includes('apple') || title.includes('iphone') || title.includes('macbook'))
       return 'Apple';
     if (title.includes('samsung') || title.includes('galaxy')) return 'Samsung';
-    if (title.includes('dell') || title.includes('inspiron') || title.includes('vostro')) return 'Dell';
-    if (title.includes('hp') || title.includes('pavilion') || title.includes('envy') || title.includes('omen') || title.includes('omnibook')) return 'HP';
-    if (title.includes('sony') || title.includes('playstation') || title.includes('ps5') || title.includes('ps4')) return 'Sony';
-    if (title.includes('logitech') || title.includes('gaming') || title.includes('gamer') || title.includes('gaming mouse')) return 'Logitech';
-    if (title.includes('asus') || title.includes('zenbook') || title.includes('vivoBook') || title.includes('rog')) return 'Asus';
+    if (title.includes('dell') || title.includes('inspiron') || title.includes('vostro'))
+      return 'Dell';
+    if (
+      title.includes('hp') ||
+      title.includes('pavilion') ||
+      title.includes('envy') ||
+      title.includes('omen') ||
+      title.includes('omnibook')
+    )
+      return 'HP';
+    if (
+      title.includes('sony') ||
+      title.includes('playstation') ||
+      title.includes('ps5') ||
+      title.includes('ps4')
+    )
+      return 'Sony';
+    if (
+      title.includes('logitech') ||
+      title.includes('gaming') ||
+      title.includes('gamer') ||
+      title.includes('gaming mouse')
+    )
+      return 'Logitech';
+    if (
+      title.includes('asus') ||
+      title.includes('zenbook') ||
+      title.includes('vivoBook') ||
+      title.includes('rog')
+    )
+      return 'Asus';
 
     return 'Premium Gear';
   }

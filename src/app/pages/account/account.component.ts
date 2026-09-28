@@ -40,11 +40,11 @@ export interface CustomerOrder {
                 [alt]="userName()"
                 referrerpolicy="no-referrer"
                 (error)="authService.currentUser()!.picture = undefined"
-                class="w-16 h-16 rounded-2xl border-2 border-blue-600/20 object-cover shadow-sm"
+                class="w-16 h-16 rounded-2xl border-2 border-emerald-600/20 object-cover shadow-sm"
               />
             } @else {
               <div
-                class="w-16 h-16 rounded-2xl bg-blue-600/10 text-blue-600 dark:text-blue-400 font-black text-2xl flex items-center justify-center border border-blue-200 dark:border-blue-900/50 shadow-inner"
+                class="w-16 h-16 rounded-2xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 font-black text-2xl flex items-center justify-center border border-emerald-200 dark:border-emerald-900/50 shadow-inner"
               >
                 {{ userInitials() }}
               </div>
@@ -54,7 +54,7 @@ export interface CustomerOrder {
           <div>
             <div class="flex items-center gap-2">
               <span
-                class="text-xs font-extrabold uppercase text-blue-600 dark:text-blue-400 tracking-wider"
+                class="text-xs font-extrabold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider"
               >
                 Customer Portal
               </span>
@@ -123,8 +123,8 @@ export interface CustomerOrder {
         <a
           [routerLink]="['/account']"
           [queryParams]="{ tab: 'overview' }"
-          [class.border-blue-600]="activeTab() === 'overview'"
-          [class.text-blue-600]="activeTab() === 'overview'"
+          [class.border-emerald-600]="activeTab() === 'overview'"
+          [class.text-emerald-600]="activeTab() === 'overview'"
           class="pb-3 px-2 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition cursor-pointer"
         >
           Dashboard Overview
@@ -132,14 +132,14 @@ export interface CustomerOrder {
         <a
           [routerLink]="['/account']"
           [queryParams]="{ tab: 'orders' }"
-          [class.border-blue-600]="activeTab() === 'orders'"
-          [class.text-blue-600]="activeTab() === 'orders'"
+          [class.border-emerald-600]="activeTab() === 'orders'"
+          [class.text-emerald-600]="activeTab() === 'orders'"
           class="pb-3 px-2 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition cursor-pointer flex items-center gap-2"
         >
           <span>Purchase History</span>
           @if (authService.isLoggedIn() && orders().length > 0) {
             <span
-              class="bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-400 text-[10px] font-black px-2 py-0.5 rounded-full"
+              class="bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 text-[10px] font-black px-2 py-0.5 rounded-full"
             >
               {{ orders().length }}
             </span>
@@ -152,11 +152,11 @@ export interface CustomerOrder {
         <div class="space-y-6">
           @if (!authService.isLoggedIn()) {
             <div
-              class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-blue-900/40 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-emerald-900/40 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
             >
               <div class="space-y-1.5 max-w-xl">
                 <span
-                  class="bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-black px-2.5 py-0.5 rounded-md uppercase tracking-wider"
+                  class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black px-2.5 py-0.5 rounded-md uppercase tracking-wider"
                 >
                   Sync Google Profile
                 </span>
@@ -169,7 +169,7 @@ export interface CustomerOrder {
 
               <button
                 (click)="authService.loginWithGoogle()"
-                class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer shadow-lg whitespace-nowrap"
+                class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer shadow-lg whitespace-nowrap"
               >
                 Authenticate with Google →
               </button>
@@ -181,7 +181,7 @@ export interface CustomerOrder {
               class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-3 shadow-xs"
             >
               <span
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block"
               >
                 Active Session Cart
               </span>
@@ -193,7 +193,7 @@ export interface CustomerOrder {
               </p>
               <button
                 (click)="cartService.openDrawer()"
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer"
               >
                 Open Cart Drawer →
               </button>
@@ -203,7 +203,7 @@ export interface CustomerOrder {
               class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-3 shadow-xs"
             >
               <span
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block"
               >
                 Total Orders Synced
               </span>
@@ -220,7 +220,7 @@ export interface CustomerOrder {
               <a
                 [routerLink]="['/account']"
                 [queryParams]="{ tab: 'orders' }"
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-block"
               >
                 View Purchase History →
               </a>
@@ -230,7 +230,7 @@ export interface CustomerOrder {
               class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-3 shadow-xs"
             >
               <span
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block"
               >
                 Logistics Center
               </span>
@@ -240,7 +240,7 @@ export interface CustomerOrder {
               </p>
               <a
                 routerLink="/track-order"
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline inline-block"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-block"
               >
                 Launch Tracker →
               </a>
@@ -267,7 +267,7 @@ export interface CustomerOrder {
             </div>
             <a
               routerLink="/track-order"
-              class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
+              class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
             >
               Open General Tracker →
             </a>
@@ -276,7 +276,7 @@ export interface CustomerOrder {
           @if (isLoadingOrders()) {
             <div class="text-center py-12 space-y-3">
               <div
-                class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"
+                class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"
               ></div>
               <p class="text-xs font-bold text-slate-500">
                 Syncing live orders from Shopify API...
@@ -293,7 +293,7 @@ export interface CustomerOrder {
               </div>
               <button
                 (click)="authService.loginWithGoogle()"
-                class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition cursor-pointer shadow-md inline-flex items-center gap-2"
+                class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition cursor-pointer shadow-md inline-flex items-center gap-2"
               >
                 <span>Sign In with Google</span>
               </button>
@@ -309,7 +309,7 @@ export interface CustomerOrder {
               </p>
               <a
                 routerLink="/products"
-                class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md"
+                class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md"
               >
                 Browse Catalog
               </a>
@@ -318,13 +318,13 @@ export interface CustomerOrder {
             <div class="space-y-4">
               @for (order of orders(); track order.id) {
                 <div
-                  class="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 bg-slate-50/50 dark:bg-slate-800/30 hover:border-blue-500/40 transition"
+                  class="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 bg-slate-50/50 dark:bg-slate-800/30 hover:border-emerald-500/40 transition"
                 >
                   <div
                     class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-200/80 dark:border-slate-800 pb-3"
                   >
                     <div>
-                      <span class="text-xs font-bold text-blue-600 dark:text-blue-400">
+                      <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">
                         Order {{ order.orderNumber }}
                       </span>
                       <span class="text-xs text-slate-400 block sm:inline sm:ml-2">
@@ -360,7 +360,7 @@ export interface CustomerOrder {
                     <a
                       [routerLink]="['/track-order']"
                       [queryParams]="{ order: order.orderNumber, email: userEmail() }"
-                      class="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition whitespace-nowrap"
+                      class="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition whitespace-nowrap"
                     >
                       <span>Track Shipment</span>
                       <svg
@@ -524,12 +524,12 @@ export class AccountComponent implements OnInit {
 
       let fulfillmentStatus: CustomerOrder['fulfillmentStatus'] = 'Processing';
       let statusClass =
-        'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60';
+        'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60';
 
       if (node.fulfillmentStatus === 'FULFILLED') {
         fulfillmentStatus = 'Delivered';
         statusClass =
-          'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60';
+          'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60';
       } else if (node.fulfillmentStatus === 'IN_TRANSIT') {
         fulfillmentStatus = 'In Transit';
         statusClass =

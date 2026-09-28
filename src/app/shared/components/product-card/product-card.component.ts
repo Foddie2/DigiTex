@@ -10,7 +10,7 @@ import { CurrencyService } from '../../../core/services/currency';
   template: `
     <div
       (click)="selectProduct.emit(product)"
-      class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-blue-500 transition-all duration-300 cursor-pointer shadow-sm group h-full"
+      class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-emerald-500 transition-all duration-300 cursor-pointer shadow-sm group h-full"
     >
       <!-- Flush Product Image Container (No Outer Padding) -->
       <div class="relative w-full h-48 bg-slate-100 dark:bg-slate-900 overflow-hidden">
@@ -27,7 +27,7 @@ import { CurrencyService } from '../../../core/services/currency';
       <div class="p-4 flex flex-col justify-between flex-1">
         <div>
           <h3
-            class="font-bold text-slate-900 dark:text-white text-base truncate group-hover:text-blue-600 transition-colors"
+            class="font-bold text-slate-900 dark:text-white text-base truncate group-hover:text-emerald-600 transition-colors"
           >
             {{ product.title }}
           </h3>
@@ -48,7 +48,7 @@ import { CurrencyService } from '../../../core/services/currency';
           <button
             (click)="$event.stopPropagation(); addToCart()"
             [disabled]="isAdding"
-            class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer disabled:opacity-50"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer disabled:opacity-50"
           >
             {{ isAdding ? 'Adding...' : 'Add to Cart' }}
           </button>

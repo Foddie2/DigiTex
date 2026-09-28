@@ -31,7 +31,7 @@ import { AuthService } from '../../../core/services/auth';
             <!-- Track Order Link -->
             <a
               routerLink="/track-order"
-              class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1.5 py-0.5"
+              class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200 flex items-center gap-1.5 py-0.5"
               title="Track live shipment status"
             >
               <span class="material-symbols-outlined text-[16px]">local_shipping</span>
@@ -46,7 +46,7 @@ import { AuthService } from '../../../core/services/auth';
                 (click)="toggleDropdown('lang')"
                 aria-label="Select Language"
                 [attr.aria-expanded]="isLangOpen()"
-                class="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium cursor-pointer py-0.5"
+                class="flex items-center gap-1 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200 font-medium cursor-pointer py-0.5"
               >
                 <span>🌐 {{ languageService.selectedLang() }}</span>
                 <span
@@ -63,19 +63,19 @@ import { AuthService } from '../../../core/services/auth';
                 >
                   <button
                     (click)="selectLang('EN')"
-                    class="w-full text-left px-3.5 py-1.5 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
+                    class="w-full text-left px-3.5 py-1.5 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
                   >
                     English (EN)
                   </button>
                   <button
                     (click)="selectLang('ES')"
-                    class="w-full text-left px-3.5 py-1.5 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
+                    class="w-full text-left px-3.5 py-1.5 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
                   >
                     Español (ES)
                   </button>
                   <button
                     (click)="selectLang('FR')"
-                    class="w-full text-left px-3.5 py-1.5 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
+                    class="w-full text-left px-3.5 py-1.5 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer dark:text-slate-200"
                   >
                     Français (FR)
                   </button>
@@ -95,7 +95,9 @@ import { AuthService } from '../../../core/services/auth';
               title="Toggle Theme"
             >
               @if (themeService.isDarkMode()) {
-                <span class="material-symbols-outlined text-[15px] text-blue-400">light_mode</span>
+                <span class="material-symbols-outlined text-[15px] text-emerald-400"
+                  >light_mode</span
+                >
               } @else {
                 <span class="material-symbols-outlined text-[15px] text-slate-600">dark_mode</span>
               }
@@ -114,7 +116,8 @@ import { AuthService } from '../../../core/services/auth';
           class="rubik-glitch-regular text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide flex items-center gap-1 group transition-transform duration-200 active:scale-95"
           aria-label="DigiTex E-Commerce Home"
         >
-          <span class="text-blue-600 dark:text-blue-500 group-hover:text-blue-500 transition-colors"
+          <span
+            class="text-emerald-600 dark:text-emerald-500 group-hover:text-emerald-500 transition-colors"
             >Digi</span
           >Tex
         </a>
@@ -128,12 +131,12 @@ import { AuthService } from '../../../core/services/auth';
             (keyup.enter)="onSearch()"
             placeholder="Search products, services, tech categories..."
             aria-label="Search Catalog"
-            class="w-full bg-slate-100/80 dark:bg-slate-800/80 text-slate-800 dark:text-slate-100 pl-4 pr-11 py-2.5 rounded-full border border-slate-200/80 dark:border-slate-700/60 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-500/20 outline-none text-sm transition-all duration-200 placeholder:text-slate-400"
+            class="w-full bg-slate-100/80 dark:bg-slate-800/80 text-slate-800 dark:text-slate-100 pl-4 pr-11 py-2.5 rounded-full border border-slate-200/80 dark:border-slate-700/60 focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm transition-all duration-200 placeholder:text-slate-400"
           />
           <button
             (click)="onSearch()"
             aria-label="Submit Search"
-            class="absolute right-1.5 top-1.5 p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 rounded-full cursor-pointer transition-colors duration-200 flex items-center justify-center"
+            class="absolute right-1.5 top-1.5 p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 rounded-full cursor-pointer transition-colors duration-200 flex items-center justify-center"
             title="Execute Search"
           >
             <span class="material-symbols-outlined text-[20px]">search</span>
@@ -162,11 +165,11 @@ import { AuthService } from '../../../core/services/auth';
                       [src]="authService.currentUser()?.picture"
                       [alt]="authService.currentUser()?.name || 'User Avatar'"
                       referrerpolicy="no-referrer"
-                      class="w-8 h-8 rounded-full object-cover border-2 border-blue-600/40 group-hover:border-blue-600 transition-colors"
+                      class="w-8 h-8 rounded-full object-cover border-2 border-emerald-600/40 group-hover:border-emerald-600 transition-colors"
                     />
                   } @else {
                     <div
-                      class="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50 font-black text-xs flex items-center justify-center"
+                      class="w-8 h-8 rounded-full bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 font-black text-xs flex items-center justify-center"
                     >
                       {{ authService.currentUser()?.initials || 'VC' }}
                     </div>
@@ -178,7 +181,7 @@ import { AuthService } from '../../../core/services/auth';
                 </div>
               } @else {
                 <div
-                  class="p-2 text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 hover:bg-slate-100/80 dark:hover:bg-slate-800 rounded-full transition-all flex items-center justify-center"
+                  class="p-2 text-slate-700 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 hover:bg-slate-100/80 dark:hover:bg-slate-800 rounded-full transition-all flex items-center justify-center"
                 >
                   <span class="material-symbols-outlined text-[24px]">account_circle</span>
                 </div>
@@ -192,7 +195,7 @@ import { AuthService } from '../../../core/services/auth';
               >
                 <div class="px-4 py-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-t-2xl">
                   <p
-                    class="text-[11px] font-extrabold uppercase text-blue-600 dark:text-blue-400 tracking-wider"
+                    class="text-[11px] font-extrabold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider"
                   >
                     {{ authService.isLoggedIn() ? 'Verified Customer' : 'Account profile' }}
                   </p>
@@ -215,7 +218,7 @@ import { AuthService } from '../../../core/services/auth';
                     routerLink="/account"
                     [queryParams]="{ tab: 'overview' }"
                     (click)="isAccountOpen.set(false)"
-                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50/80 dark:hover:bg-slate-700/60 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50/80 dark:hover:bg-slate-700/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
                   >
                     <span class="material-symbols-outlined text-[20px] text-slate-400"
                       >dashboard</span
@@ -227,7 +230,7 @@ import { AuthService } from '../../../core/services/auth';
                     routerLink="/account"
                     [queryParams]="{ tab: 'orders' }"
                     (click)="isAccountOpen.set(false)"
-                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50/80 dark:hover:bg-slate-700/60 hover:text-blue-600 dark:hover:text-blue-400 transition-colors animate-pulse duration-150"
+                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50/80 dark:hover:bg-slate-700/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors animate-pulse duration-150"
                   >
                     <span class="material-symbols-outlined text-[20px] text-slate-400"
                       >local_shipping</span
@@ -239,7 +242,7 @@ import { AuthService } from '../../../core/services/auth';
                     routerLink="/account"
                     [queryParams]="{ tab: 'wishlist' }"
                     (click)="isAccountOpen.set(false)"
-                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-blue-50/80 dark:hover:bg-slate-700/60 hover:text-blue-600 dark:hover:text-blue-400 transition-colors animate-pulse duration-150"
+                    class="flex items-center gap-3 px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-50/80 dark:hover:bg-slate-700/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors animate-pulse duration-150"
                   >
                     <span class="material-symbols-outlined text-[20px] text-slate-400"
                       >favorite</span
@@ -259,7 +262,7 @@ import { AuthService } from '../../../core/services/auth';
                   } @else {
                     <button
                       (click)="authService.loginWithGoogle(); isAccountOpen.set(false)"
-                      class="text-xs font-extrabold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       Sign In with Google →
                     </button>
@@ -272,7 +275,7 @@ import { AuthService } from '../../../core/services/auth';
           <!-- Shopping Cart Trigger -->
           <button
             (click)="cartService.openDrawer(); closeAllDropdowns()"
-            class="relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/80 dark:hover:bg-slate-800 rounded-full transition-all duration-200 cursor-pointer group flex items-center justify-center"
+            class="relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100/80 dark:hover:bg-slate-800 rounded-full transition-all duration-200 cursor-pointer group flex items-center justify-center"
             title="Shopping Cart Drawer"
             aria-label="Open Shopping Cart Drawer"
           >
@@ -282,7 +285,7 @@ import { AuthService } from '../../../core/services/auth';
             >
             @if (cartService.itemCount() > 0) {
               <span
-                class="absolute top-0.5 right-0.5 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 shadow-xs animate-pulse"
+                class="absolute top-0.5 right-0.5 bg-emerald-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 shadow-xs animate-pulse"
               >
                 {{ cartService.itemCount() }}
               </span>
@@ -292,7 +295,7 @@ import { AuthService } from '../../../core/services/auth';
           <!-- Mobile Hamburger Toggle -->
           <button
             (click)="isMobileOpen.set(!isMobileOpen())"
-            class="md:hidden p-2 text-slate-700 dark:text-slate-200 hover:text-blue-600 cursor-pointer rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center"
+            class="md:hidden p-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600 cursor-pointer rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center"
             aria-label="Toggle Mobile Menu Navigation"
             [attr.aria-expanded]="isMobileOpen()"
           >
@@ -313,9 +316,10 @@ import { AuthService } from '../../../core/services/auth';
               (mouseenter)="isMegaOpen.set(true); isCatOpen.set(false); isServicesOpen.set(false)"
               (click)="toggleDropdown('mega')"
               [attr.aria-expanded]="isMegaOpen()"
-              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors duration-150"
+              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors duration-150"
             >
-              <span class="material-symbols-outlined text-[18px] text-blue-600 dark:text-blue-500"
+              <span
+                class="material-symbols-outlined text-[18px] text-emerald-600 dark:text-emerald-500"
                 >grid_view</span
               >
               <span>Shop Catalog</span>
@@ -332,7 +336,7 @@ import { AuthService } from '../../../core/services/auth';
               >
                 <div>
                   <h4
-                    class="font-bold text-xs uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-3"
+                    class="font-bold text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-3"
                   >
                     Computers & Laptops
                   </h4>
@@ -342,7 +346,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Laptops' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         High-Performance Laptops
                       </a>
@@ -352,7 +356,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Desktops' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         Workstations & Towers
                       </a>
@@ -362,7 +366,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Monitors' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         4K & Curved Monitors
                       </a>
@@ -372,7 +376,7 @@ import { AuthService } from '../../../core/services/auth';
 
                 <div>
                   <h4
-                    class="font-bold text-xs uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-3"
+                    class="font-bold text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-3"
                   >
                     Mobile & Accessories
                   </h4>
@@ -382,7 +386,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Smartphones' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         Flagship Smartphones
                       </a>
@@ -392,7 +396,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Headphones' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         Noise-Canceling Audio
                       </a>
@@ -402,7 +406,7 @@ import { AuthService } from '../../../core/services/auth';
                         routerLink="/products"
                         [queryParams]="{ category: 'Keyboards' }"
                         (click)="isMegaOpen.set(false)"
-                        class="hover:text-blue-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
+                        class="hover:text-emerald-600 dark:hover:text-white transition-colors duration-150 block py-0.5"
                       >
                         Mechanical Keyboards
                       </a>
@@ -411,11 +415,11 @@ import { AuthService } from '../../../core/services/auth';
                 </div>
 
                 <div
-                  class="bg-linear-to-br from-blue-50 to-indigo-50 dark:from-slate-700/50 dark:to-slate-700/30 p-4 flex flex-col justify-between border border-blue-100 dark:border-slate-600/50"
+                  class="bg-linear-to-br from-emerald-50 to-indigo-50 dark:from-slate-700/50 dark:to-slate-700/30 p-4 flex flex-col justify-between border border-emerald-100 dark:border-slate-600/50"
                 >
                   <div>
                     <span
-                      class="inline-block bg-blue-600 text-white text-[10px] font-black px-2 py-0.5 rounded-xl uppercase tracking-wider mb-2"
+                      class="inline-block bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded-xl uppercase tracking-wider mb-2"
                     >
                       Featured Drop
                     </span>
@@ -429,7 +433,7 @@ import { AuthService } from '../../../core/services/auth';
                   <a
                     routerLink="/products"
                     (click)="isMegaOpen.set(false)"
-                    class="text-xs font-extrabold text-blue-600 dark:text-blue-400 hover:underline mt-4 block"
+                    class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline mt-4 block"
                   >
                     Explore Hardware →
                   </a>
@@ -443,9 +447,10 @@ import { AuthService } from '../../../core/services/auth';
             <button
               (mouseenter)="isServicesOpen.set(true); isMegaOpen.set(false); isCatOpen.set(false)"
               (click)="toggleDropdown('services')"
-              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors"
+              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors"
             >
-              <span class="material-symbols-outlined text-[18px] text-blue-600 dark:text-blue-500"
+              <span
+                class="material-symbols-outlined text-[18px] text-emerald-600 dark:text-emerald-500"
                 >design_services</span
               >
               <span>Services</span>
@@ -464,7 +469,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/services"
                   [queryParams]="{ category: 'Software_Development' }"
                   (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
                   <div class="font-bold flex items-center gap-1.5">
                     <span>💻</span>
@@ -479,7 +484,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/services"
                   [queryParams]="{ category: 'Cybersecurity' }"
                   (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
                   <div class="font-bold flex items-center gap-1.5">
                     <span>🛡️</span>
@@ -494,7 +499,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/services"
                   [queryParams]="{ category: 'Consultancy' }"
                   (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
                   <div class="font-bold flex items-center gap-1.5">
                     <span>💡</span>
@@ -509,7 +514,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/services"
                   [queryParams]="{ category: 'Managed_Services' }"
                   (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
                   <div class="font-bold flex items-center gap-1.5">
                     <span>⚙️</span>
@@ -529,7 +534,7 @@ import { AuthService } from '../../../core/services/auth';
               (mouseenter)="isCatOpen.set(true); isMegaOpen.set(false); isServicesOpen.set(false)"
               (click)="toggleDropdown('cat')"
               [attr.aria-expanded]="isCatOpen()"
-              class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 h-11 cursor-pointer transition-colors duration-150"
+              class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors duration-150"
             >
               <span>Categories</span>
               <span
@@ -547,7 +552,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/products"
                   [queryParams]="{ category: 'Hardware' }"
                   (click)="isCatOpen.set(false)"
-                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
                 >
                   💻 Hardware & Components
                 </a>
@@ -555,7 +560,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/products"
                   [queryParams]="{ category: 'Software' }"
                   (click)="isCatOpen.set(false)"
-                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
                 >
                   ⚡ Software & Licenses
                 </a>
@@ -563,7 +568,7 @@ import { AuthService } from '../../../core/services/auth';
                   routerLink="/products"
                   [queryParams]="{ category: 'Networking' }"
                   (click)="isCatOpen.set(false)"
-                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-700/80 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  class="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/80 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
                 >
                   📡 Networking & Servers
                 </a>
@@ -574,16 +579,16 @@ import { AuthService } from '../../../core/services/auth';
           <!-- Direct Links -->
           <a
             routerLink="/products"
-            routerLinkActive="text-blue-600 dark:text-blue-400 font-bold"
-            class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+            routerLinkActive="text-emerald-600 dark:text-emerald-400 font-bold"
+            class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
           >
             All Products
           </a>
           <a
             routerLink="/products"
             [queryParams]="{ features: 'New_Arrivals' }"
-            routerLinkActive="text-blue-600 dark:text-blue-400 font-bold"
-            class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+            routerLinkActive="text-emerald-600 dark:text-emerald-400 font-bold"
+            class="text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150"
           >
             New Arrivals
           </a>
@@ -603,12 +608,12 @@ import { AuthService } from '../../../core/services/auth';
               (keyup.enter)="onSearch()"
               placeholder="Search tech catalog..."
               aria-label="Mobile Search Bar"
-              class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 pl-4 pr-10 py-2.5 rounded-xl text-sm border-none outline-none focus:ring-2 focus:ring-blue-500/20"
+              class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 pl-4 pr-10 py-2.5 rounded-xl text-sm border-none outline-none focus:ring-2 focus:ring-emerald-500/20"
             />
             <button
               (click)="onSearch()"
               aria-label="Search"
-              class="absolute right-3 top-2.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-center"
+              class="absolute right-3 top-2.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center justify-center"
             >
               <span class="material-symbols-outlined text-[20px]">search</span>
             </button>
@@ -619,7 +624,7 @@ import { AuthService } from '../../../core/services/auth';
           >
             <div class="flex items-center justify-between px-1">
               <p
-                class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider"
+                class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider"
               >
                 {{
                   authService.isLoggedIn()
@@ -640,7 +645,7 @@ import { AuthService } from '../../../core/services/auth';
                 routerLink="/account"
                 [queryParams]="{ tab: 'overview' }"
                 (click)="isMobileOpen.set(false)"
-                class="p-2.5 bg-white dark:bg-slate-800 rounded-xl shadow-2xs text-slate-700 dark:text-slate-200 active:bg-blue-50 transition"
+                class="p-2.5 bg-white dark:bg-slate-800 rounded-xl shadow-2xs text-slate-700 dark:text-slate-200 active:bg-emerald-50 transition"
               >
                 Profile
               </a>
@@ -648,7 +653,7 @@ import { AuthService } from '../../../core/services/auth';
                 routerLink="/account"
                 [queryParams]="{ tab: 'orders' }"
                 (click)="isMobileOpen.set(false)"
-                class="p-2.5 bg-white dark:bg-slate-800 rounded-lg shadow-2xs text-slate-700 dark:text-slate-200 active:bg-blue-50 transition"
+                class="p-2.5 bg-white dark:bg-slate-800 rounded-lg shadow-2xs text-slate-700 dark:text-slate-200 active:bg-emerald-50 transition"
               >
                 Orders
               </a>
@@ -656,7 +661,7 @@ import { AuthService } from '../../../core/services/auth';
                 routerLink="/account"
                 [queryParams]="{ tab: 'wishlist' }"
                 (click)="isMobileOpen.set(false)"
-                class="p-2.5 bg-white dark:bg-slate-800 rounded-lg shadow-2xs text-slate-700 dark:text-slate-200 active:bg-blue-50 transition"
+                class="p-2.5 bg-white dark:bg-slate-800 rounded-lg shadow-2xs text-slate-700 dark:text-slate-200 active:bg-emerald-50 transition"
               >
                 Wishlist
               </a>
@@ -714,7 +719,7 @@ import { AuthService } from '../../../core/services/auth';
             <a
               routerLink="/track-order"
               (click)="isMobileOpen.set(false)"
-              class="py-2 text-blue-600 dark:text-blue-400 font-bold"
+              class="py-2 text-emerald-600 dark:text-emerald-400 font-bold"
               >Track Live Shipment →</a
             >
           </div>

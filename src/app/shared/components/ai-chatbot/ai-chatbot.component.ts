@@ -15,7 +15,7 @@ import { AuthService } from '../../../core/services/auth';
       @if (!aiService.isOpen()) {
         <button
           (click)="aiService.toggleChat()"
-          class="relative bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
+          class="relative bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
           aria-label="Open AI Shopping Assistant"
         >
           <span class="text-xl">✨</span>
@@ -33,11 +33,11 @@ import { AuthService } from '../../../core/services/auth';
           class="w-[90vw] sm:w-96 h-[560px] max-h-[82vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn"
         >
           <div
-            class="p-4 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white flex items-center justify-between border-b border-blue-900/40"
+            class="p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white flex items-center justify-between border-b border-emerald-900/40"
           >
             <div class="flex items-center gap-3">
               <div
-                class="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/30 text-white flex items-center justify-center font-bold text-sm"
+                class="w-9 h-9 rounded-xl bg-emerald-600/30 border border-emerald-400/30 text-white flex items-center justify-center font-bold text-sm"
               >
                 ✨
               </div>
@@ -62,14 +62,14 @@ import { AuthService } from '../../../core/services/auth';
               <div [class.justify-end]="msg.sender === 'user'" class="flex items-start gap-2.5">
                 @if (msg.sender === 'ai') {
                   <div
-                    class="w-6 h-6 rounded-lg bg-blue-600/10 text-blue-600 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
+                    class="w-6 h-6 rounded-lg bg-emerald-600/10 text-emerald-600 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
                   >
                     ✨
                   </div>
                 }
 
                 <div
-                  [class.bg-blue-600]="msg.sender === 'user'"
+                  [class.bg-emerald-600]="msg.sender === 'user'"
                   [class.text-white]="msg.sender === 'user'"
                   [class.bg-slate-100]="msg.sender === 'ai'"
                   [class.dark:bg-slate-800]="msg.sender === 'ai'"
@@ -99,14 +99,14 @@ import { AuthService } from '../../../core/services/auth';
                               {{ p.title }}
                             </h4>
                             <span
-                              class="font-extrabold text-blue-600 dark:text-blue-400 text-[10px] block"
+                              class="font-extrabold text-emerald-600 dark:text-emerald-400 text-[10px] block"
                             >
                               {{ p.price }}
                             </span>
                           </div>
                           <button
                             (click)="addQuickProduct(p.variantId)"
-                            class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] px-2.5 py-1.5 rounded-lg shrink-0 cursor-pointer active:scale-95 transition"
+                            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] px-2.5 py-1.5 rounded-lg shrink-0 cursor-pointer active:scale-95 transition"
                           >
                             + Cart
                           </button>
@@ -117,9 +117,9 @@ import { AuthService } from '../../../core/services/auth';
 
                   @if (msg.leadCapture) {
                     <div
-                      class="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-blue-500/30 space-y-2 mt-2"
+                      class="bg-gradient-to-r from-emerald-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-emerald-500/30 space-y-2 mt-2"
                     >
-                      <p class="text-[10px] font-bold text-blue-300">
+                      <p class="text-[10px] font-bold text-emerald-300">
                         Unlock 10% Off + M-Pesa Express Voucher:
                       </p>
                       <div class="flex gap-1.5">
@@ -150,7 +150,7 @@ import { AuthService } from '../../../core/services/auth';
               <div
                 class="flex items-center gap-2 text-slate-400 text-[11px] font-bold animate-pulse"
               >
-                <span class="w-2 h-2 bg-blue-600 rounded-full animate-ping"></span>
+                <span class="w-2 h-2 bg-emerald-600 rounded-full animate-ping"></span>
                 Byte is thinking...
               </div>
             }
@@ -161,19 +161,19 @@ import { AuthService } from '../../../core/services/auth';
           >
             <button
               (click)="sendQuickPrompt('How do I track my order?')"
-              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-blue-500 cursor-pointer"
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-emerald-500 cursor-pointer"
             >
               📦 Track Order
             </button>
             <button
               (click)="sendQuickPrompt('Recommend 100W GaN chargers')"
-              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-blue-500 cursor-pointer"
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-emerald-500 cursor-pointer"
             >
               ⚡ GaN Chargers
             </button>
             <button
               (click)="sendQuickPrompt('How does M-Pesa express checkout work?')"
-              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-blue-500 cursor-pointer"
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-emerald-500 cursor-pointer"
             >
               📱 M-Pesa Help
             </button>
@@ -188,12 +188,12 @@ import { AuthService } from '../../../core/services/auth';
               [(ngModel)]="inputText"
               name="chatInput"
               placeholder="Ask about hardware, delivery, or checkout..."
-              class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white px-3.5 py-2 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500"
+              class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white px-3.5 py-2 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald-500"
             />
             <button
               type="submit"
               [disabled]="!inputText.trim() || aiService.isThinking()"
-              class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold p-2.5 rounded-xl text-xs cursor-pointer shadow-md transition"
+              class="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold p-2.5 rounded-xl text-xs cursor-pointer shadow-md transition"
             >
               ➔
             </button>

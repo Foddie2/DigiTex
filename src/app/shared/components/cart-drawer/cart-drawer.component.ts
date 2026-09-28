@@ -27,7 +27,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
               <div class="flex items-center gap-2">
                 <h2 class="text-lg font-bold">Your Cart</h2>
                 <span
-                  class="bg-blue-600/10 text-blue-600 dark:text-blue-400 text-xs font-bold px-2.5 py-0.5 rounded-full"
+                  class="bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2.5 py-0.5 rounded-full"
                 >
                   {{ cartService.itemCount() }}
                   {{ cartService.itemCount() === 1 ? 'item' : 'items' }}
@@ -57,7 +57,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
 
             @if (cartService.isLoading()) {
               <div
-                class="bg-blue-600 text-white text-xs py-1.5 px-4 text-center font-medium animate-pulse"
+                class="bg-emerald-600 text-white text-xs py-1.5 px-4 text-center font-medium animate-pulse"
               >
                 Syncing with Shopify...
               </div>
@@ -81,7 +81,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
                   </div>
                   <button
                     (click)="cartService.closeDrawer()"
-                    class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition cursor-pointer"
+                    class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-6 py-3 rounded-xl transition cursor-pointer"
                   >
                     Browse Catalog
                   </button>
@@ -160,11 +160,11 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
 
                   @if (cartService.showUpsell()) {
                     <div
-                      class="bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-blue-900/10 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200 dark:border-blue-800/80 rounded-2xl p-3.5 space-y-3 shadow-xs"
+                      class="bg-gradient-to-r from-emerald-900/10 via-indigo-900/10 to-emerald-900/10 dark:from-emerald-950/40 dark:to-indigo-950/40 border border-emerald-200 dark:border-emerald-800/80 rounded-2xl p-3.5 space-y-3 shadow-xs"
                     >
                       <div class="flex items-center justify-between">
                         <span
-                          class="bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider"
+                          class="bg-emerald-600 text-white text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider"
                         >
                           {{ cartService.upsellOffer().discountBadge }}
                         </span>
@@ -184,7 +184,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
                             {{ cartService.upsellOffer().productTitle }}
                           </h5>
                           <div class="flex items-center gap-2 mt-0.5">
-                            <span class="text-xs font-black text-blue-600 dark:text-blue-400">
+                            <span class="text-xs font-black text-emerald-600 dark:text-emerald-400">
                               {{ currencyService.formatPrice(cartService.upsellOffer().price) }}
                             </span>
                             <span class="text-[10px] text-slate-400 line-through">
@@ -198,7 +198,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
                         <button
                           (click)="addUpsellItem()"
                           [disabled]="cartService.isLoading()"
-                          class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-3 py-2 rounded-xl shrink-0 cursor-pointer shadow-sm transition active:scale-95 disabled:opacity-50"
+                          class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3 py-2 rounded-xl shrink-0 cursor-pointer shadow-sm transition active:scale-95 disabled:opacity-50"
                         >
                           + Add
                         </button>
@@ -243,7 +243,7 @@ import { AiChatbotService } from '../../../core/services/ai-chatbot';
                 <button
                   (click)="cartService.proceedToCheckout()"
                   [disabled]="cartService.isLoading()"
-                  class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2 text-sm cursor-pointer disabled:opacity-50"
+                  class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-sm cursor-pointer disabled:opacity-50"
                 >
                   <span>Proceed to Checkout</span>
                   <span class="text-xs opacity-80">→</span>

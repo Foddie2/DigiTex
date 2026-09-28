@@ -8,7 +8,9 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
       <div>
-        <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
+        <span
+          class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest"
+        >
           Legal Compliance
         </span>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">

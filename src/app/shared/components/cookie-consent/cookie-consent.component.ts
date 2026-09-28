@@ -30,7 +30,7 @@ import { RouterLink } from '@angular/router';
               and preferred currency. Read our
               <a
                 routerLink="/cookie-policy"
-                class="text-blue-600 dark:text-blue-400 underline hover:text-blue-500 font-semibold"
+                class="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-500 font-semibold"
                 >Cookie Policy</a
               >.
             </p>
@@ -39,7 +39,7 @@ import { RouterLink } from '@angular/router';
               <button
                 type="button"
                 (click)="acceptAll()"
-                class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-2.5 px-3 rounded-xl transition shadow-md shadow-blue-600/20 cursor-pointer text-center"
+                class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2.5 px-3 rounded-xl transition shadow-md shadow-emerald-600/20 cursor-pointer text-center"
               >
                 Accept All
               </button>

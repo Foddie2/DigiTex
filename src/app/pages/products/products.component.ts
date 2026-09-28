@@ -37,7 +37,7 @@ interface BrandCollection {
       >
         <div>
           <span
-            class="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest"
+            class="text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest"
           >
             Verified Hardware & Services Catalog
           </span>
@@ -92,7 +92,7 @@ interface BrandCollection {
                     {{ collection.brand }}
                   </h2>
                   <span
-                    class="bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 text-xs font-bold px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-800/60"
+                    class="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60"
                   >
                     {{ collection.products.length }} Items
                   </span>
@@ -121,14 +121,14 @@ interface BrandCollection {
                     @if (idx === 1) {
                       <div class="w-72 sm:w-80 shrink-0 snap-start flex">
                         <div
-                          class="w-full flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-900 via-slate-900 to-blue-950 text-white border border-blue-800/50 shadow-lg relative overflow-hidden group/ad transition-all duration-300 transform-gpu hover:-translate-y-1.5 hover:shadow-blue-900/30"
+                          class="w-full flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950 text-white border border-emerald-800/50 shadow-lg relative overflow-hidden group/ad transition-all duration-300 transform-gpu hover:-translate-y-1.5 hover:shadow-emerald-900/30"
                         >
                           <div
-                            class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/20 blur-3xl rounded-full group-hover/ad:bg-blue-500/40 transition-colors duration-500"
+                            class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/20 blur-3xl rounded-full group-hover/ad:bg-emerald-500/40 transition-colors duration-500"
                           ></div>
                           <div class="space-y-4 relative z-10">
                             <span
-                              class="text-[10px] font-black uppercase tracking-widest text-blue-300 bg-blue-500/20 px-2.5 py-1 rounded-md border border-blue-500/30"
+                              class="text-[10px] font-black uppercase tracking-widest text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-md border border-emerald-500/30"
                             >
                               Sponsored Partner
                             </span>
@@ -143,7 +143,7 @@ interface BrandCollection {
                           <div class="pt-6 relative z-10">
                             <button
                               (click)="cartService.openDrawer()"
-                              class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
+                              class="inline-flex items-center justify-center w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
                             >
                               Setup Express Payment →
                             </button>
@@ -211,7 +211,7 @@ interface BrandCollection {
           </p>
           <button
             (click)="clearFilter()"
-            class="mt-4 inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
+            class="mt-4 inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-md"
           >
             Clear Filters & View Full Catalog
           </button>
@@ -267,7 +267,7 @@ interface BrandCollection {
                     <button
                       (click)="activeImageIndex.set($index)"
                       [class.ring-2]="activeImageIndex() === $index"
-                      class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 shrink-0 cursor-pointer ring-blue-600 transition-all transform-gpu hover:-translate-y-1 hover:shadow-md"
+                      class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 shrink-0 cursor-pointer ring-emerald-600 transition-all transform-gpu hover:-translate-y-1 hover:shadow-md"
                     >
                       <img
                         [src]="getShopifyEdgeOptimizedImage(imgUrl, 150)"
@@ -284,7 +284,7 @@ interface BrandCollection {
             <div class="space-y-6 pt-2">
               <div>
                 <span
-                  class="inline-block text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2"
+                  class="inline-block text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-2"
                 >
                   {{ getBrandName(selectedProduct()) }}
                 </span>
@@ -319,7 +319,7 @@ interface BrandCollection {
               <button
                 (click)="addToCart(selectedProduct())"
                 [disabled]="isModalAdding()"
-                class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-blue-600/30 transition-all transform-gpu cursor-pointer active:scale-95 flex items-center justify-center gap-2"
+                class="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-600/30 transition-all transform-gpu cursor-pointer active:scale-95 flex items-center justify-center gap-2"
               >
                 @if (isModalAdding()) {
                   <span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
@@ -376,7 +376,7 @@ interface BrandCollection {
                 @for (related of getRelatedProducts(selectedProduct()); track related.id) {
                   <div
                     (click)="openProductModal(related)"
-                    class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 p-3 rounded-2xl cursor-pointer hover:border-blue-500 transition-all duration-200 transform-gpu hover:-translate-y-1 group/rel flex gap-3 items-center"
+                    class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 p-3 rounded-2xl cursor-pointer hover:border-emerald-500 transition-all duration-200 transform-gpu hover:-translate-y-1 group/rel flex gap-3 items-center"
                   >
                     <div
                       class="w-16 h-16 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-slate-800 flex items-center justify-center"
@@ -393,11 +393,11 @@ interface BrandCollection {
                     </div>
                     <div class="overflow-hidden">
                       <h5
-                        class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover/rel:text-blue-600 dark:group-hover/rel:text-blue-400 transition-colors"
+                        class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover/rel:text-emerald-600 dark:group-hover/rel:text-emerald-400 transition-colors"
                       >
                         {{ related.title }}
                       </h5>
-                      <p class="text-xs font-extrabold text-blue-600 dark:text-blue-400 mt-1">
+                      <p class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">
                         {{ currencyService.formatPrice(getProductPrice(related)) }}
                       </p>
                     </div>
