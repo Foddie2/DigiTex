@@ -106,7 +106,7 @@ interface HeroSlide {
               href="#featured-products"
               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 text-md"
             >
-              <span>Explore Practical Products</span>
+              <span>Explore more Products</span>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
@@ -117,12 +117,12 @@ interface HeroSlide {
               </svg>
             </a>
 
-            <a
+            <!-- <a
               href="#faq"
               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700/90 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-semibold px-7 py-4 rounded-xl transition-all duration-200 text-md shadow-sm"
             >
               How It Works
-            </a>
+            </a> -->
           </div>
 
           <!-- Trust Badges -->
