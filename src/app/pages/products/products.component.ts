@@ -9,7 +9,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // Core Services & Models
 import { ShopifyService } from '../../core/services/shopify';
@@ -28,7 +28,7 @@ interface BrandCollection {
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent, RouterLink],
+  imports: [CommonModule, ProductCardComponent],
   template: `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       <!-- 1. SEO & Filter Header -->

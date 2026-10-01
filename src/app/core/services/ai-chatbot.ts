@@ -31,7 +31,7 @@ export class AiChatbotService {
     {
       id: '1',
       sender: 'ai',
-      text: 'Hey! Byte here. What hardware or setup query can I assist with?',
+      text: 'Hey there! Byte here 👋 Need help picking a problem-solving gadget or tracking an order?',
       timestamp: this.getFormattedTime(),
     },
   ]);
@@ -62,20 +62,15 @@ export class AiChatbotService {
     userContext: {
       userName?: string;
       userEmail?: string;
+      currency?: 'USD' | 'EUR' | 'KES' | 'GBP' | 'CAD' | 'AUD' | 'JPY' | 'CHF' | 'CNY' | 'INR';
+      country?: string;
+      city?: string;
       isLoggedIn?: boolean;
       cartCount?: number;
     } = {},
   ): Promise<void> {
     const trimmedText = userText.trim();
     if (!trimmedText || this.isThinking()) return;
-
-    // Build history excluding initial greeting
-    const cleanHistory = this.messages()
-      .filter((m) => m.id !== '1')
-      .map((m) => ({
-        sender: m.sender,
-        text: m.text,
-      }));
 
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
@@ -91,15 +86,12 @@ export class AiChatbotService {
     let responseProducts: ChatProduct[] = [];
 
     try {
-      // ✅ ALWAYS USE RELATIVE PATH:
-      // Local dev uses proxy.conf.json -> https://techbytes-store.vercel.app
-      // Production uses native Vercel route directly on the same origin
-      const apiUrl = '/api/ai-chat';
-
       if (isPlatformBrowser(this.platformId)) {
-        console.log('📡 [Byte Sending Request via proxy]:', apiUrl);
+        const cleanHistory = this.messages()
+          .filter((m) => m.id !== '1' && m.id !== userMsg.id && m.text.trim().length > 0)
+          .map((m) => ({ sender: m.sender, text: m.text }));
 
-        const response = await fetch(apiUrl, {
+        const response = await fetch('/api/ai-chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -111,20 +103,20 @@ export class AiChatbotService {
 
         const data = await response.json().catch(() => ({}));
 
-        if (!response.ok) {
-          console.error('Backend Status Error:', response.status, data);
+        if (response.ok) {
+          fullResponseText = data.text || '';
+          responseProducts = data.products || [];
+        } else {
+          console.error('Serverless Function Notice:', data);
           fullResponseText =
             data.text ||
-            data.error ||
-            'Connection dipped for a second. Mind firing that query over once more?';
-        } else {
-          fullResponseText = data.text || 'Byte online! How can I assist with your setup?';
-          responseProducts = data.products || [];
+            'My connection stuttered for a moment! What gear or questions were you looking into?';
         }
       }
-    } catch (err: any) {
-      console.error('💥 [Fetch Exception]:', err);
-      fullResponseText = 'Connection dipped for a second. Mind firing that query over once more?';
+    } catch (err) {
+      console.error('Network Fetch Error:', err);
+      fullResponseText =
+        'My connection stuttered for a moment! What gear or questions were you looking into?';
     } finally {
       this.isThinking.set(false);
     }
@@ -150,7 +142,7 @@ export class AiChatbotService {
     let charIndex = 0;
     return new Promise((resolve) => {
       const interval = setInterval(() => {
-        charIndex += Math.floor(Math.random() * 3) + 2;
+        charIndex += Math.floor(Math.random() * 12) + 18;
         const textChunk = fullText.slice(0, charIndex);
 
         this.messages.update((prev) =>
@@ -164,7 +156,7 @@ export class AiChatbotService {
           );
           resolve();
         }
-      }, 15);
+      }, 14);
     });
   }
 

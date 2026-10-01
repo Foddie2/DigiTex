@@ -15,7 +15,7 @@ import { AuthService } from '../../../core/services/auth';
       @if (!aiService.isOpen()) {
         <button
           (click)="aiService.toggleChat()"
-          class="relative bg-linear-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
+          class="relative bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
           aria-label="Open AI Shopping Assistant"
         >
           <span class="text-xl">✨</span>
@@ -24,16 +24,14 @@ import { AuthService } from '../../../core/services/auth';
           >
             Ask DigiTex AI
           </span>
-          <!-- <span
-            class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full animate-pulse"
-          ></span> -->
         </button>
       } @else {
         <div
-          class="w-[90vw] sm:w-96 h-140 max-h-[82vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn"
+          class="w-[90vw] sm:w-96 h-[560px] max-h-[82vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn"
         >
+          <!-- Header -->
           <div
-            class="p-4 bg-linear-to-r from-slate-900 via-emerald-950 to-slate-900 text-white flex items-center justify-between border-b border-emerald-900/40"
+            class="p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white flex items-center justify-between border-b border-emerald-900/40"
           >
             <div class="flex items-center gap-3">
               <div
@@ -44,8 +42,8 @@ import { AuthService } from '../../../core/services/auth';
               <div>
                 <h3 class="text-xs font-black tracking-wide">Byte — Tech Concierge</h3>
                 <p class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online & Syncing
-                  Storefront
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online
+                  & Syncing Storefront
                 </p>
               </div>
             </div>
@@ -57,6 +55,7 @@ import { AuthService } from '../../../core/services/auth';
             </button>
           </div>
 
+          <!-- Messages List -->
           <div #scrollContainer class="flex-1 overflow-y-auto p-4 space-y-4 text-xs no-scrollbar">
             @for (msg of aiService.messages(); track msg.id) {
               <div [class.justify-end]="msg.sender === 'user'" class="flex items-start gap-2.5">
@@ -117,7 +116,7 @@ import { AuthService } from '../../../core/services/auth';
 
                   @if (msg.leadCapture) {
                     <div
-                      class="bg-linear-to-r from-emerald-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-emerald-500/30 space-y-2 mt-2"
+                      class="bg-gradient-to-r from-emerald-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-emerald-500/30 space-y-2 mt-2"
                     >
                       <p class="text-[10px] font-bold text-emerald-300">
                         Unlock 10% Off + M-Pesa Express Voucher:
@@ -156,7 +155,8 @@ import { AuthService } from '../../../core/services/auth';
             }
           </div>
 
-          <div
+          <!-- Hardware Quick Actions -->
+          <!-- <div
             class="px-3 py-2 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex gap-1.5 overflow-x-auto no-scrollbar"
           >
             <button
@@ -164,6 +164,12 @@ import { AuthService } from '../../../core/services/auth';
               class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-emerald-500 cursor-pointer"
             >
               📦 Track Order
+            </button>
+            <button
+              (click)="sendQuickPrompt('Recommend high-performance laptops')"
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full text-[10px] font-bold text-slate-600 dark:text-slate-300 shrink-0 hover:border-emerald-500 cursor-pointer"
+            >
+              💻 Laptops
             </button>
             <button
               (click)="sendQuickPrompt('Recommend 100W GaN chargers')"
@@ -177,8 +183,9 @@ import { AuthService } from '../../../core/services/auth';
             >
               📱 M-Pesa Help
             </button>
-          </div>
+          </div> -->
 
+          <!-- Form Input -->
           <form
             (submit)="sendMessage($event)"
             class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex gap-2"
@@ -210,6 +217,19 @@ import { AuthService } from '../../../core/services/auth';
       .no-scrollbar {
         -ms-overflow-style: none;
         scrollbar-width: none;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.2s ease-out forwards;
       }
     `,
   ],

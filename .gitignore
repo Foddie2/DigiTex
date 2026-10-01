@@ -42,3 +42,11 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+
+
+# .gitignore
+.env
+.env.local
+src/.env.local
+*.env

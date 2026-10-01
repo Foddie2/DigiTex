@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://techbytes-store.vercel.app",
+    "target": "https://digitex-store.vercel.app",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
