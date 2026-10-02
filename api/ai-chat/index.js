@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+  // CORS Headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -7,48 +8,53 @@ export default async function handler(req, res) {
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
   );
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
   try {
-    const apiKey = process.env['GEMINI_API_KEY'];
+    const apiKey = (process.env['GEMINI_API_KEY'] || '').trim();
     if (!apiKey) {
-      return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on Vercel.' });
+      console.error('❌ GEMINI_API_KEY is missing on Vercel environment variables.');
+      return res.status(500).json({
+        error: 'GEMINI_API_KEY is missing from Vercel environment variables.',
+        text: 'System setup notice: GEMINI_API_KEY is missing in Vercel settings.',
+      });
     }
 
     let body = req.body;
     if (typeof body === 'string') {
       try {
         body = JSON.parse(body);
-      } catch {
+      } catch (e) {
         body = {};
       }
     }
     body = body || {};
 
     const { prompt, history = [], userContext = {} } = body;
+
     if (!prompt || typeof prompt !== 'string') {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    // 🌍 Global Dropshipping System Prompt
-    const SYSTEM_PROMPT = `You are Byte, the Senior Tech Advisor for DigiTex — a global Shopify e-commerce store specializing in problem-solving gadgets and productivity gear.
+    const SYSTEM_PROMPT = `You are Byte, the Senior Tech Advisor for DigiTex — a Shopify tech dropshipping store specializing in problem-solving gadgets, productivity gear, and mobile accessories.
 
-Global Sales & Support Capabilities:
-1. Multilingual Support: ALWAYS detect and respond in the exact language used by the customer (e.g., English, Spanish, French, Swahili, German, Arabic).
-2. Worldwide Shipping: Express international delivery (7–12 business days average globally). Free shipping on orders over $50 USD (or equivalent). Live tracking available at /track-order.
-3. Payment Flexibility:
-   - Global: Visa, Mastercard, American Express, PayPal, Apple Pay, Google Pay.
-   - Buy Now Pay Later (where available): Klarna, Afterpay.
-   - East Africa: Instant M-Pesa Express STK Push.
-4. Customs & Taxes: Inform international buyers that standard duties/VAT may apply depending on their local import regulations.
+Global Capabilities:
+1. Multilingual Support: Auto-detect and respond fluently in the customer's language.
+2. Worldwide Express Delivery: 5–10 business days delivery (free on orders over $50). Order tracking available at /track-order.
+3. Payment Options: Instant M-Pesa Express STK push, credit/debit cards, Apple Pay, PayPal.
 
-Conversational Guidelines:
-- Speak like an expert, friendly tech advisor.
-- Keep replies concise (2 to 3 natural sentences).
-- Help customers match problem-solving gadgets to their daily setup needs.
-- Conclude with a helpful follow-up question.`;
+Tone Guidelines:
+- Speak naturally like a friendly, expert tech peer (2 to 3 conversational sentences).
+- Explain how our gadgets solve the customer's specific problem clearly.
+- End naturally with an engaging follow-up question.`;
 
+    // Enforce strict user / model turn alternation
     const turns = [];
     if (Array.isArray(history)) {
       for (const msg of history) {
@@ -58,32 +64,31 @@ Conversational Guidelines:
         if (turns.length > 0 && turns[turns.length - 1].role === role) {
           turns[turns.length - 1].parts[0].text += `\n${msg.text}`;
         } else {
-          turns.push({ role, parts: [{ text: msg.text }] });
+          turns.push({
+            role,
+            parts: [{ text: msg.text }],
+          });
         }
       }
     }
 
-    // Inject location, currency, and cart info into context if available
-    const locationInfo = [
-      userContext.country ? `Country: ${userContext.country}` : null,
-      userContext.currency ? `Currency: ${userContext.currency}` : null,
+    const contextualPrompt =
       userContext.userName && userContext.userName !== 'Customer'
-        ? `Customer: ${userContext.userName}`
-        : null,
-      userContext.cartCount ? `Cart Items: ${userContext.cartCount}` : null,
-    ]
-      .filter(Boolean)
-      .join(', ');
-
-    const contextualPrompt = locationInfo ? `[User Context: ${locationInfo}]\n${prompt}` : prompt;
+        ? `[Customer: ${userContext.userName}, Cart Items: ${userContext.cartCount || 0}]\n${prompt}`
+        : prompt;
 
     if (turns.length > 0 && turns[turns.length - 1].role === 'user') {
       turns[turns.length - 1].parts[0].text = contextualPrompt;
     } else {
-      turns.push({ role: 'user', parts: [{ text: contextualPrompt }] });
+      turns.push({
+        role: 'user',
+        parts: [{ text: contextualPrompt }],
+      });
     }
 
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-2.0-flash'];
+    // Active endpoints matching your original working setup
+    const modelsToTry = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-flash-latest'];
+
     let lastError = '';
 
     for (const modelName of modelsToTry) {
@@ -98,7 +103,7 @@ Conversational Guidelines:
             contents: turns,
             generationConfig: {
               temperature: 0.75,
-              maxOutputTokens: 350,
+              maxOutputTokens: 300,
             },
           }),
         });
@@ -106,12 +111,14 @@ Conversational Guidelines:
         const data = await response.json();
 
         if (response.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-          return res.status(200).json({ text: data.candidates[0].content.parts[0].text });
+          return res.status(200).json({
+            text: data.candidates[0].content.parts[0].text,
+          });
         } else {
           lastError = data?.error?.message || `HTTP ${response.status}`;
         }
       } catch (err) {
-        lastError = err?.message || 'Fetch error';
+        lastError = err?.message || 'Network fetch error';
       }
     }
 
