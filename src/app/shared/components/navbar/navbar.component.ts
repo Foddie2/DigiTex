@@ -313,7 +313,7 @@ import { AuthService } from '../../../core/services/auth';
           <!-- MEGA MENU DROPDOWN (PRODUCT CATALOG) -->
           <div class="relative" (mouseleave)="isMegaOpen.set(false)">
             <button
-              (mouseenter)="isMegaOpen.set(true); isCatOpen.set(false); isServicesOpen.set(false)"
+              (mouseenter)="isMegaOpen.set(true); isCatOpen.set(false)"
               (click)="toggleDropdown('mega')"
               [attr.aria-expanded]="isMegaOpen()"
               class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors duration-150"
@@ -442,96 +442,10 @@ import { AuthService } from '../../../core/services/auth';
             }
           </div>
 
-          <!-- SERVICES DROPDOWN MENU (Navigates to /services?category=...) -->
-          <div class="relative flex items-center h-full" (mouseleave)="isServicesOpen.set(false)">
-            <button
-              (mouseenter)="isServicesOpen.set(true); isMegaOpen.set(false); isCatOpen.set(false)"
-              (click)="toggleDropdown('services')"
-              class="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors"
-            >
-              <span
-                class="material-symbols-outlined text-[18px] text-emerald-600 dark:text-emerald-500"
-                >design_services</span
-              >
-              <span>Services</span>
-              <span
-                class="material-symbols-outlined text-[16px] transition-transform duration-200"
-                [class.rotate-180]="isServicesOpen()"
-                >expand_more</span
-              >
-            </button>
-
-            @if (isServicesOpen()) {
-              <div
-                class="absolute left-0 top-11 w-72 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl py-2 z-50 animate-fadeIn"
-              >
-                <a
-                  routerLink="/services"
-                  [queryParams]="{ category: 'Software_Development' }"
-                  (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                >
-                  <div class="font-bold flex items-center gap-1.5">
-                    <span>💻</span>
-                    <span>Custom Software Dev</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Web, Mobile & API Engineering
-                  </div>
-                </a>
-
-                <a
-                  routerLink="/services"
-                  [queryParams]="{ category: 'Cybersecurity' }"
-                  (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                >
-                  <div class="font-bold flex items-center gap-1.5">
-                    <span>🛡️</span>
-                    <span>Cybersecurity Services</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Pen Testing & Security Audits
-                  </div>
-                </a>
-
-                <a
-                  routerLink="/services"
-                  [queryParams]="{ category: 'Consultancy' }"
-                  (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                >
-                  <div class="font-bold flex items-center gap-1.5">
-                    <span>💡</span>
-                    <span>IT & Tech Consultancy</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Architecture & Cloud Strategy
-                  </div>
-                </a>
-
-                <a
-                  routerLink="/services"
-                  [queryParams]="{ category: 'Managed_Services' }"
-                  (click)="isServicesOpen.set(false)"
-                  class="block px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                >
-                  <div class="font-bold flex items-center gap-1.5">
-                    <span>⚙️</span>
-                    <span>Managed IT Services</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    24/7 Infrastructure & Support
-                  </div>
-                </a>
-              </div>
-            }
-          </div>
-
           <!-- CATEGORIES DROPDOWN MENU -->
           <div class="relative" (mouseleave)="isCatOpen.set(false)">
             <button
-              (mouseenter)="isCatOpen.set(true); isMegaOpen.set(false); isServicesOpen.set(false)"
+              (mouseenter)="isCatOpen.set(true); isMegaOpen.set(false)"
               (click)="toggleDropdown('cat')"
               [attr.aria-expanded]="isCatOpen()"
               class="flex items-center gap-1 font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 h-11 cursor-pointer transition-colors duration-150"
@@ -682,34 +596,6 @@ import { AuthService } from '../../../core/services/auth';
               >Shop Full Catalog</a
             >
             <a
-              routerLink="/services"
-              [queryParams]="{ category: 'Software_Development' }"
-              (click)="isMobileOpen.set(false)"
-              class="py-2 border-b border-slate-100 dark:border-slate-800"
-              >Software Development</a
-            >
-            <a
-              routerLink="/services"
-              [queryParams]="{ category: 'Cybersecurity' }"
-              (click)="isMobileOpen.set(false)"
-              class="py-2 border-b border-slate-100 dark:border-slate-800"
-              >Cybersecurity Services</a
-            >
-            <a
-              routerLink="/services"
-              [queryParams]="{ category: 'Consultancy' }"
-              (click)="isMobileOpen.set(false)"
-              class="py-2 border-b border-slate-100 dark:border-slate-800"
-              >IT Consultancy</a
-            >
-            <a
-              routerLink="/services"
-              [queryParams]="{ category: 'Managed_Services' }"
-              (click)="isMobileOpen.set(false)"
-              class="py-2 border-b border-slate-100 dark:border-slate-800"
-              >Managed IT Services</a
-            >
-            <a
               routerLink="/products"
               [queryParams]="{ features: 'New_Arrivals' }"
               (click)="isMobileOpen.set(false)"
@@ -754,17 +640,15 @@ export class Navbar {
   isMobileOpen = signal<boolean>(false);
   isMegaOpen = signal<boolean>(false);
   isCatOpen = signal<boolean>(false);
-  isServicesOpen = signal<boolean>(false);
   isAccountOpen = signal<boolean>(false);
   isLangOpen = signal<boolean>(false);
   searchQuery = signal<string>('');
 
-  toggleDropdown(type: 'lang' | 'account' | 'mega' | 'cat' | 'services'): void {
+  toggleDropdown(type: 'lang' | 'account' | 'mega' | 'cat'): void {
     this.isLangOpen.set(type === 'lang' ? !this.isLangOpen() : false);
     this.isAccountOpen.set(type === 'account' ? !this.isAccountOpen() : false);
     this.isMegaOpen.set(type === 'mega' ? !this.isMegaOpen() : false);
     this.isCatOpen.set(type === 'cat' ? !this.isCatOpen() : false);
-    this.isServicesOpen.set(type === 'services' ? !this.isServicesOpen() : false);
   }
 
   closeAllDropdowns(): void {
@@ -772,7 +656,6 @@ export class Navbar {
     this.isAccountOpen.set(false);
     this.isMegaOpen.set(false);
     this.isCatOpen.set(false);
-    this.isServicesOpen.set(false);
   }
 
   selectLang(lang: string): void {
