@@ -158,7 +158,7 @@ export interface BrandLogo {
           >
             <div>
               <span
-                class="inline-block bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2"
+                class="inline-block bg-sky-600/10 dark:bg-sky-600/20 text-sky-700 dark:text-sky-300 border border-sky-600/30 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2"
               >
                 🔥 High Demand
               </span>
@@ -196,7 +196,7 @@ export interface BrandLogo {
               @for (product of topSellingProducts(); track product.id; let i = $index) {
                 <div
                   (click)="openProductModal(product)"
-                  class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-amber-500/60 dark:hover:border-amber-500/60 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group/card"
+                  class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-sky-600/60 dark:hover:border-sky-600/60 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group/card"
                 >
                   <div>
                     <!-- Flush Product Image Container -->
@@ -204,7 +204,7 @@ export interface BrandLogo {
                       class="relative w-full h-48 bg-slate-100 dark:bg-slate-900 overflow-hidden"
                     >
                       <span
-                        class="absolute top-2 left-2 z-10 bg-amber-500 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"
+                        class="absolute top-2 left-2 z-10 bg-sky-600 text-slate-100 font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"
                       >
                         #{{ i + 1 }} Bestseller
                       </span>
