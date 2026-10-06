@@ -7,6 +7,7 @@ import { CartDrawerComponent } from './shared/components/cart-drawer/cart-drawer
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
 import { CartService } from './core/services/cart';
 import { AiChatbotComponent } from './shared/components/ai-chatbot/ai-chatbot.component';
+import { CookieConsentService } from './core/services/cookie-consent';
 
 @Component({
   standalone: true,
@@ -38,10 +39,12 @@ import { AiChatbotComponent } from './shared/components/ai-chatbot/ai-chatbot.co
 })
 export class AppComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
+  private consentService = inject(CookieConsentService);
   public cartService = inject(CartService);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      this.consentService.initConsentTracking();
       this.cartService.initCart();
     }
   }
