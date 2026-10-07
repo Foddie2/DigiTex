@@ -2,6 +2,7 @@ import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core
 import { isPlatformBrowser } from '@angular/common';
 import { createStorefrontApiClient } from '@shopify/storefront-api-client';
 import { environment } from '../../../environments/environment.development';
+import { AnalyticsService, AnalyticsItem } from './analytics';
 
 export interface CartItem {
   id: string; // Line item ID in Shopify
@@ -464,6 +465,37 @@ export class CartService {
       subtotal: rawCart.cost?.subtotalAmount || { amount: '0.00', currencyCode: 'USD' },
       lines,
     };
+  }
+
+  // Inside Cart Service or Component
+  private analytics = inject(AnalyticsService);
+
+  onAddToCart(product: any): void {
+    const item: AnalyticsItem = {
+      item_id: product.variantId,
+      item_name: product.title,
+      price: parseFloat(product.price),
+      quantity: 1,
+    };
+
+    this.analytics.trackAddToCart(item);
+  }
+
+  proceedToShopifyCheckout(cartItems: any[], checkoutUrl: string): void {
+    const items: AnalyticsItem[] = cartItems.map((i) => ({
+      item_id: i.variantId,
+      item_name: i.title,
+      price: parseFloat(i.price),
+      quantity: i.quantity,
+    }));
+
+    const total = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+
+    // Tracks checkout intent before redirecting to Shopify domain
+    this.analytics.trackBeginCheckout(items, total);
+
+    // Redirect user to Shopify Checkout
+    window.location.href = checkoutUrl;
   }
 
   proceedToCheckout(): void {

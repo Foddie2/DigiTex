@@ -1,5 +1,6 @@
 import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { AnalyticsService } from './analytics';
 
 export interface ChatProduct {
   variantId: string;
@@ -22,6 +23,7 @@ export interface ChatMessage {
 })
 export class AiChatbotService {
   private platformId = inject(PLATFORM_ID);
+  private analytics = inject(AnalyticsService);
 
   isOpen = signal<boolean>(false);
   isThinking = signal<boolean>(false);
@@ -38,6 +40,9 @@ export class AiChatbotService {
 
   toggleChat(): void {
     this.isOpen.update((v) => !v);
+    if (this.isOpen()) {
+      this.analytics.trackChatInteraction('opened');
+    }
   }
 
   triggerProactiveNudge(messageText: string): void {
@@ -78,6 +83,7 @@ export class AiChatbotService {
       text: trimmedText,
       timestamp: this.getFormattedTime(),
     };
+    this.analytics.trackChatInteraction('message_sent', trimmedText.slice(0, 30));
 
     this.messages.update((prev) => [...prev, userMsg]);
     this.isThinking.set(true);

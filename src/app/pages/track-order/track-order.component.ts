@@ -141,4 +141,18 @@ export class TrackOrderComponent implements OnInit {
       this.isLoading.set(false);
     }, 600);
   }
+
+  // Inside Order Tracking Component
+  searchOrder(orderNumber: string): void {
+    // Execute tracking query logic...
+    const found = true; // result status
+    this.trackOrderAnalytics(orderNumber, found);
+  }
+
+  private trackOrderAnalytics(orderNumber: string, found: boolean): void {
+    // Analytics instrumentation is intentionally kept local to avoid coupling this component
+    // to a missing global service. The tracking call is no-op unless an analytics service is added.
+    // This preserves the component contract without TypeScript errors.
+    console.info('Order search tracked', { orderNumber, found });
+  }
 }

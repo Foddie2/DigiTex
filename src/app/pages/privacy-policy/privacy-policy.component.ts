@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopifyPolicyService, ShopifyPolicy } from '../../core/services/shopify-policy.service';
+import { AnalyticsService } from '../../core/services/analytics';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -82,12 +83,14 @@ import { ShopifyPolicyService, ShopifyPolicy } from '../../core/services/shopify
 })
 export class PrivacyPolicyComponent implements OnInit {
   private policyService = inject(ShopifyPolicyService);
+  private analytics = inject(AnalyticsService);
 
   policy = signal<ShopifyPolicy | null>(null);
   isLoading = signal<boolean>(true);
 
   async ngOnInit(): Promise<void> {
     const data = await this.policyService.getPrivacyPolicy();
+    this.analytics.trackPolicyView('privacy_policy');
     this.policy.set(data);
     this.isLoading.set(false);
   }

@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment.development';
 import { CartService } from '../../core/services/cart';
 import { CurrencyService } from '../../core/services/currency';
 import { AuthService } from '../../core/services/auth';
+import { AnalyticsService } from '../../core/services/analytics';
 
 type TabType = 'overview' | 'orders' | 'wishlist' | 'privacy';
 
@@ -404,6 +405,7 @@ export class AccountComponent implements OnInit {
   public cartService = inject(CartService);
   public currencyService = inject(CurrencyService);
   public authService = inject(AuthService);
+  private analytics = inject(AnalyticsService);
 
   private client = createStorefrontApiClient({
     storeDomain: environment.shopifyDomain,
@@ -432,6 +434,7 @@ export class AccountComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.analytics.trackPageView('account');
     this.route.queryParams.subscribe((params) => {
       const tab = params['tab'] as TabType;
       this.activeTab.set(

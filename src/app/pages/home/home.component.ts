@@ -5,6 +5,7 @@ import { CartService } from '../../core/services/cart';
 import { CurrencyService } from '../../core/services/currency';
 import { HeroComponent } from '../../shared/components/hero/hero.component';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { AnalyticsService } from '../../core/services/analytics';
 
 export interface BrandLogo {
   name: string;
@@ -699,6 +700,7 @@ export class HomeComponent implements OnInit {
   private shopifyService = inject(ShopifyService);
   public cartService = inject(CartService);
   public currencyService = inject(CurrencyService);
+  private analytics = inject(AnalyticsService);
 
   @ViewChild('featuredContainer') featuredContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('topSellingContainer') topSellingContainer!: ElementRef<HTMLDivElement>;
@@ -760,6 +762,7 @@ export class HomeComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.analytics.trackPageView('home');
     try {
       const data = await this.shopifyService.getProducts(24);
       this.products.set(data || []);

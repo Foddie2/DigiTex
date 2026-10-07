@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>TechBytes Store</title>
+    <title>DigiTex</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -33,6 +33,27 @@
 
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png" />
+
+<!-- Google Analytics , Google Ads -->
+<!-- Google tag (gtag.js) for GA4 + Google Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Configure GA4 with manual SPA page view tracking
+    gtag('config', 'G-XXXXXXXXXX', {
+      send_page_view: false,
+      cookie_flags: 'max-age=7200;secure;samesite=none',
+      linker: {
+        domains: ['techbytesstore.myshopify.com', 'checkout.digitex.com'] // Links session to Shopify Checkout
+      }
+    });
+
+    // Configure Google Ads Conversion Tag
+    gtag('config', 'AW-YYYYYYYYY');
+  </script>
   </head>
   <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
     <app-root></app-root>
