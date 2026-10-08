@@ -18,6 +18,13 @@ import { CurrencyService } from '../../core/services/currency';
 import { Product } from '../../core/models/shopify.model';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 
+// Shopify Product Service & Interfaces
+import {
+  ShopifyProductService,
+  ShopifyProduct,
+  ShopifyVariant,
+} from '../../core/services/shopify-product';
+
 interface BrandCollection {
   brand: string;
   products: Product[];
@@ -219,7 +226,7 @@ interface BrandCollection {
       }
     </div>
 
-    <!-- 5. MODERN GRAPHICAL PRODUCT MODAL -->
+    <!-- 5. MODERN GRAPHICAL PRODUCT MODAL WITH SHOPIFY INTEGRATION -->
     @if (selectedProduct()) {
       <div
         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-lg animate-fadeIn"
@@ -297,33 +304,76 @@ interface BrandCollection {
 
               <div class="flex items-baseline gap-4">
                 <span class="text-4xl font-black text-slate-900 dark:text-white">
-                  {{ currencyService.formatPrice(getProductPrice(selectedProduct())) }}
+                  {{ currencyService.formatPrice(getModalPrice()) }}
                 </span>
                 <span
-                  class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800/60"
+                  class="text-xs font-bold px-3 py-1.5 rounded-lg border"
+                  [ngClass]="
+                    isCurrentVariantAvailable()
+                      ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800/60'
+                      : 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800/60'
+                  "
                 >
-                  Ready to Dispatch
+                  {{ isCurrentVariantAvailable() ? 'Ready to Dispatch' : 'Out of Stock' }}
                 </span>
               </div>
 
-              <p
-                class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-h-36 overflow-y-auto pr-2 no-scrollbar"
-              >
-                {{
-                  selectedProduct()?.description ||
-                    'Verified DigiTex high-performance hardware release.'
-                }}
-              </p>
+              <!-- Live Shopify Product Description -->
+              @if (detailedProduct()?.descriptionHtml) {
+                <div
+                  class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-h-36 overflow-y-auto pr-2 no-scrollbar prose dark:prose-invert"
+                  [innerHTML]="detailedProduct()?.descriptionHtml"
+                ></div>
+              } @else {
+                <p
+                  class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-h-36 overflow-y-auto pr-2 no-scrollbar"
+                >
+                  {{
+                    selectedProduct()?.description ||
+                      'Verified DigiTex high-performance hardware release.'
+                  }}
+                </p>
+              }
+
+              <!-- Shopify Variants Selector -->
+              @if (detailedProduct()?.variants && detailedProduct()!.variants.length > 1) {
+                <div class="space-y-2">
+                  <span
+                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block"
+                  >
+                    Available Hardware Configurations
+                  </span>
+                  <div class="flex flex-wrap gap-2">
+                    @for (v of detailedProduct()!.variants; track v.id) {
+                      <button
+                        (click)="selectedVariant.set(v)"
+                        [disabled]="!v.availableForSale"
+                        [class.ring-2]="selectedVariant()?.id === v.id"
+                        [class.ring-emerald-600]="selectedVariant()?.id === v.id"
+                        [class.bg-emerald-50]="selectedVariant()?.id === v.id"
+                        [class.dark:bg-emerald-950/40]="selectedVariant()?.id === v.id"
+                        [class.opacity-40]="!v.availableForSale"
+                        class="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200 transition-all cursor-pointer active:scale-95"
+                      >
+                        {{ v.title }}
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
 
               <!-- Add to Cart CTA -->
               <button
                 (click)="addToCart(selectedProduct())"
-                [disabled]="isModalAdding()"
+                [disabled]="isModalAdding() || !isCurrentVariantAvailable()"
                 class="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-600/30 transition-all transform-gpu cursor-pointer active:scale-95 flex items-center justify-center gap-2"
               >
                 @if (isModalAdding()) {
                   <span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
                   <span>Syncing to Cart...</span>
+                } @else if (!isCurrentVariantAvailable()) {
+                  <span class="material-symbols-outlined text-[18px]">block</span>
+                  <span>Currently Out of Stock</span>
                 } @else {
                   <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
                   <span>Add Item to Cart</span>
@@ -447,6 +497,7 @@ interface BrandCollection {
 export class ProductsPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private shopifyService = inject(ShopifyService);
+  private shopifyProductService = inject(ShopifyProductService);
   public cartService = inject(CartService);
   public currencyService = inject(CurrencyService);
 
@@ -459,6 +510,8 @@ export class ProductsPageComponent implements OnInit {
   brandCollections = signal<BrandCollection[]>([]);
 
   selectedProduct = signal<Product | null>(null);
+  detailedProduct = signal<ShopifyProduct | null>(null);
+  selectedVariant = signal<ShopifyVariant | null>(null);
   activeImageIndex = signal<number>(0);
   isModalAdding = signal<boolean>(false);
 
@@ -470,7 +523,6 @@ export class ProductsPageComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // Dynamically listen to route query params (?category=..., ?features=..., ?q=...)
     this.route.queryParams.subscribe(async (params) => {
       const category = params['category'] || null;
       const feature = params['features'] || null;
@@ -619,6 +671,20 @@ export class ProductsPageComponent implements OnInit {
     return [];
   }
 
+  getModalPrice(): any {
+    const variant = this.selectedVariant();
+    if (variant) return variant.price;
+    return this.getProductPrice(this.selectedProduct());
+  }
+
+  isCurrentVariantAvailable(): boolean {
+    const variant = this.selectedVariant();
+    if (variant !== null) return variant.availableForSale;
+    const prod = this.selectedProduct() as any;
+    if (prod && typeof prod.availableForSale === 'boolean') return prod.availableForSale;
+    return true;
+  }
+
   scrollContainer(index: number, direction: 'left' | 'right'): void {
     const containers = this.scrollContainers.toArray();
     if (containers[index]) {
@@ -647,13 +713,30 @@ export class ProductsPageComponent implements OnInit {
     }
   }
 
-  openProductModal(product: Product): void {
+  async openProductModal(product: Product): Promise<void> {
     this.selectedProduct.set(product);
+    this.detailedProduct.set(null);
+    this.selectedVariant.set(null);
     this.activeImageIndex.set(0);
+
+    // Background fetch deep live product configs from Shopify via handle
+    if (product.handle) {
+      const detailed = await this.shopifyProductService.getProductByHandle(product.handle);
+      if (detailed) {
+        this.detailedProduct.set(detailed);
+        if (detailed.variants.length > 0) {
+          const firstAvailable =
+            detailed.variants.find((v) => v.availableForSale) || detailed.variants[0];
+          this.selectedVariant.set(firstAvailable);
+        }
+      }
+    }
   }
 
   closeProductModal(): void {
     this.selectedProduct.set(null);
+    this.detailedProduct.set(null);
+    this.selectedVariant.set(null);
   }
 
   getRelatedProducts(currentProduct: any): Product[] {
@@ -665,7 +748,8 @@ export class ProductsPageComponent implements OnInit {
   }
 
   async addToCart(product: any): Promise<void> {
-    const variantId = this.getVariantId(product);
+    const variant = this.selectedVariant();
+    const variantId = variant ? variant.id : this.getVariantId(product);
     if (!variantId) return;
 
     this.isModalAdding.set(true);
