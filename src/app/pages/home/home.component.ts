@@ -25,7 +25,7 @@ export interface BrandLogo {
       <!-- Trust / Benefits Bar -->
       <section class="max-w-7xl mx-auto px-4 pt-12">
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 rounded-2xl shadow-xs text-center"
+          class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 rounded-3xl shadow-xs text-center"
         >
           <div class="space-y-1">
             <span class="text-2xl">🚚</span>
@@ -55,13 +55,14 @@ export interface BrandLogo {
         </div>
       </section>
 
-      <!-- Featured Products (Horizontal Left-to-Right Scroll with Flanking Arrows & Infinite Shimmer) -->
+      <!-- Featured Products (With Card Elevation & Hover Lift) -->
       <section id="featured-products" class="max-w-7xl mx-auto px-4">
         <div class="mb-8">
           <span
             class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest"
-            >Real-time Catalog</span
           >
+            Real-time Catalog
+          </span>
           <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
             Featured Drops
           </h2>
@@ -80,7 +81,6 @@ export interface BrandLogo {
         }
 
         @if (!isLoading() && products().length > 0) {
-          <!-- Relative Row Flanked by Side Navigation Arrows (Named Group to Prevent Child Hover Collisions) -->
           <div class="relative group/row">
             <!-- Left Flanking Arrow -->
             <button
@@ -95,10 +95,12 @@ export interface BrandLogo {
             <div
               #featuredContainer
               (scroll)="onFeaturedScroll($event)"
-              class="flex gap-6 overflow-x-auto scroll-smooth pb-4 px-1 no-scrollbar snap-x snap-mandatory"
+              class="flex gap-6 overflow-x-auto scroll-smooth pb-6 px-1 pt-2 no-scrollbar snap-x snap-mandatory"
             >
               @for (product of products(); track product.id) {
-                <div class="w-72 sm:w-80 shrink-0 snap-start">
+                <div
+                  class="w-72 sm:w-80 shrink-0 snap-start transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-2xl rounded-3xl"
+                >
                   <app-product-card
                     [product]="product"
                     (selectProduct)="openProductModal($event)"
@@ -106,7 +108,7 @@ export interface BrandLogo {
                 </div>
               }
 
-              <!-- Infinite Loading Shimmer Skeleton Cards (Flush Top Image / Padded Body) -->
+              <!-- Infinite Loading Shimmer Skeleton Cards -->
               @if (isLoadingMore()) {
                 @for (shimmer of [1, 2]; track shimmer) {
                   <div
@@ -117,7 +119,7 @@ export interface BrandLogo {
                         class="w-full h-48 bg-slate-200 dark:bg-slate-700/60 relative overflow-hidden"
                       >
                         <div
-                          class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 dark:via-slate-600/20 to-transparent animate-shimmer"
+                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 dark:via-slate-600/20 to-transparent animate-shimmer"
                         ></div>
                       </div>
                       <div class="p-4 space-y-2">
@@ -149,10 +151,93 @@ export interface BrandLogo {
         }
       </section>
 
-      <!-- Top Selling Items Showcase -->
+      <!-- NEW: SPONSORED PRODUCTS SECTION (Connected with Shopify) -->
+      @if (!isLoading() && sponsoredProducts().length > 0) {
+        <section class="max-w-7xl mx-auto px-4">
+          <div
+            class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-950 border border-emerald-800/40 p-8 sm:p-12 shadow-2xl"
+          >
+            <div
+              class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/20 blur-[100px] rounded-full pointer-events-none"
+            ></div>
+            <div
+              class="absolute -bottom-24 -left-24 w-96 h-96 bg-sky-500/15 blur-[100px] rounded-full pointer-events-none"
+            ></div>
+
+            <div
+              class="relative z-10 flex flex-col lg:flex-row gap-10 items-center justify-between"
+            >
+              <div class="lg:w-1/3 space-y-4">
+                <span
+                  class="inline-block bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-black px-3 py-1 rounded-md uppercase tracking-widest"
+                >
+                  Sponsored Partner Spotlight
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
+                  Featured Hardware Upgrades
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Verified high-performance gear with express global shipping and instant M-Pesa or
+                  card checkout.
+                </p>
+                <button
+                  (click)="cartService.openDrawer()"
+                  class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition cursor-pointer active:scale-95 transform-gpu shadow-lg"
+                >
+                  View Cart & Express Checkout →
+                </button>
+              </div>
+
+              <div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                @for (product of sponsoredProducts(); track product.id) {
+                  <div
+                    (click)="openProductModal(product)"
+                    class="bg-slate-900/80 backdrop-blur-md border border-slate-700/60 hover:border-emerald-500/80 p-5 rounded-3xl flex gap-4 items-center cursor-pointer transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-900/30 group/sponsor"
+                  >
+                    <div
+                      class="w-24 h-24 bg-white dark:bg-slate-950 rounded-2xl overflow-hidden shrink-0 border border-slate-800 flex items-center justify-center p-1"
+                    >
+                      @if (getModalImages(product)[0]) {
+                        <img
+                          [src]="getModalImages(product)[0]"
+                          [alt]="product.title"
+                          class="w-full h-full object-cover rounded-xl group-hover/sponsor:scale-105 transition-transform duration-500"
+                        />
+                      }
+                    </div>
+                    <div class="flex-1 overflow-hidden space-y-1.5">
+                      <span
+                        class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block"
+                      >
+                        {{ getBrandName(product) }}
+                      </span>
+                      <h4
+                        class="font-bold text-white text-sm truncate group-hover/sponsor:text-emerald-300 transition-colors"
+                      >
+                        {{ product.title }}
+                      </h4>
+                      <p class="text-base font-black text-emerald-400">
+                        {{ currencyService.formatPrice(getProductPrice(product)) }}
+                      </p>
+                      <button
+                        (click)="$event.stopPropagation(); addProductToCart(product)"
+                        class="text-xs font-bold text-slate-300 hover:text-white underline transition-colors"
+                      >
+                        Quick Add →
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      <!-- Top Selling Items Showcase (With Card Elevation & Hover Lift) -->
       <section class="max-w-7xl mx-auto px-4">
         <div
-          class="bg-linear-to-br from-slate-50 via-slate-100/70 to-emerald-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white shadow-xl dark:shadow-2xl transition-colors duration-300"
+          class="bg-gradient-to-br from-slate-50 via-slate-100/70 to-emerald-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white shadow-xl dark:shadow-2xl transition-colors duration-300"
         >
           <div
             class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4"
@@ -178,7 +263,6 @@ export interface BrandLogo {
             </a>
           </div>
 
-          <!-- Top Selling Row Flanked by Side Navigation Arrows -->
           <div class="relative group/row">
             <!-- Left Flanking Arrow -->
             <button
@@ -192,15 +276,14 @@ export interface BrandLogo {
             <!-- Horizontal Scroll Container -->
             <div
               #topSellingContainer
-              class="flex gap-6 overflow-x-auto scroll-smooth pb-4 px-1 no-scrollbar snap-x snap-mandatory"
+              class="flex gap-6 overflow-x-auto scroll-smooth pb-6 px-1 pt-2 no-scrollbar snap-x snap-mandatory"
             >
               @for (product of topSellingProducts(); track product.id; let i = $index) {
                 <div
                   (click)="openProductModal(product)"
-                  class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-sky-600/60 dark:hover:border-sky-600/60 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group/card"
+                  class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 transform-gpu hover:-translate-y-2 hover:shadow-2xl hover:border-sky-600/60 shadow-sm cursor-pointer group/card"
                 >
                   <div>
-                    <!-- Flush Product Image Container -->
                     <div
                       class="relative w-full h-48 bg-slate-100 dark:bg-slate-900 overflow-hidden"
                     >
@@ -218,7 +301,6 @@ export interface BrandLogo {
                       }
                     </div>
 
-                    <!-- Padded Content Body -->
                     <div class="p-4 space-y-1">
                       <h3
                         class="font-bold text-slate-900 dark:text-white text-base truncate group-hover/card:text-emerald-600 dark:group-hover/card:text-emerald-400 transition-colors"
@@ -233,7 +315,6 @@ export interface BrandLogo {
                     </div>
                   </div>
 
-                  <!-- Padded Footer -->
                   <div
                     class="p-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between mt-2"
                   >
@@ -245,7 +326,7 @@ export interface BrandLogo {
                     </div>
                     <button
                       (click)="$event.stopPropagation(); addProductToCart(product)"
-                      class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer"
+                      class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer active:scale-95 transform-gpu"
                     >
                       Quick Add
                     </button>
@@ -266,57 +347,31 @@ export interface BrandLogo {
         </div>
       </section>
 
-      <!-- Top Brands Section (Fixed Standalone SVG Logos) -->
-      <!-- Top Brands Section (Infinite Marquee Scroll) -->
-      <section class="max-w-7xl mx-auto px-4 py-6">
-        <div
-          class="border-y border-slate-200/80 dark:border-slate-800/80 py-8 px-4 transition-colors duration-300"
-        >
+      <!-- REDESIGNED STATIC BRANDS GRID (Removed Infinite Scroll) -->
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="border-y border-slate-200/80 dark:border-slate-800/80 py-10 px-4">
           <p
-            class="text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-8"
+            class="text-center text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-8"
           >
-            Trusted Hardware Partners & Brands
+            Verified Hardware Sourcing Partners
           </p>
 
-          <!-- Infinite Scroll Wrapper -->
-          <div class="relative w-full overflow-hidden group">
-            <div
-              class="flex items-center gap-12 sm:gap-16 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]"
-            >
-              <!-- First Set -->
-              @for (brand of brandLogos; track brand.name + '-set1') {
-                <div
-                  class="flex items-center justify-center h-12 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:scale-110 transition-all duration-300 cursor-pointer shrink-0"
-                  [title]="brand.name"
+          <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16">
+            @for (brand of brandLogos; track brand.name) {
+              <div
+                class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer p-2"
+                [title]="brand.name"
+              >
+                <svg
+                  class="w-28 h-7 fill-current transition-colors duration-300"
+                  [attr.viewBox]="brand.viewBox"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
-                  <svg
-                    class="w-28 h-7 fill-current transition-colors duration-300"
-                    [attr.viewBox]="brand.viewBox"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path [attr.d]="brand.path" />
-                  </svg>
-                </div>
-              }
-
-              <!-- Duplicate Set for Seamless Loop -->
-              @for (brand of brandLogos; track brand.name + '-set2') {
-                <div
-                  class="flex items-center justify-center h-12 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:scale-110 transition-all duration-300 cursor-pointer shrink-0"
-                  [title]="brand.name"
-                >
-                  <svg
-                    class="w-28 h-7 fill-current transition-colors duration-300"
-                    [attr.viewBox]="brand.viewBox"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path [attr.d]="brand.path" />
-                  </svg>
-                </div>
-              }
-            </div>
+                  <path [attr.d]="brand.path" />
+                </svg>
+              </div>
+            }
           </div>
         </div>
       </section>
@@ -329,11 +384,11 @@ export interface BrandLogo {
               >The Problem</span
             >
             <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">
-              Overpriced Electronics With Unreliable Shipping Times.
+              Overpriced Hardware with Delayed Shipping.
             </h3>
             <p class="text-slate-600 dark:text-slate-400 text-md leading-relaxed">
-              Most online electronics dropshippers use slow fulfillment channels with unverified
-              product quality, resulting in weeks of waiting and defective gear.
+              Most hardware resellers inflate prices and ship from overseas warehouses with no
+              real-time stock verification, leading to delays and frustration for customers.
             </p>
           </div>
           <div
@@ -343,33 +398,38 @@ export interface BrandLogo {
               >Our Solution</span
             >
             <h4 class="text-xl font-bold text-slate-900 dark:text-white">
-              Direct-API Verified Sourcing
+              Verified Stock, Competitive Pricing, and Express Global Shipping
             </h4>
             <p class="text-slate-600 dark:text-slate-400 text-md leading-relaxed">
-              TechBytes integrates direct Shopify inventory pipelines to guarantee real-time stock
-              levels, fast dispatching, and strict quality checks before items leave the warehouse.
+              DigiTex integrates directly with verified hardware suppliers, providing real-time
+              stock updates, competitive pricing, and express global shipping options to ensure a
+              seamless purchasing experience.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Top Rated Hardware (Marquee Scroll) -->
+      <!-- Top Rated Hardware (With Masked Gradient Endings & Card Elevation) -->
       <section class="max-w-7xl mx-auto px-4 overflow-hidden">
         <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">
           Top Rated Hardware
         </h2>
 
-        <div class="relative w-full overflow-hidden group">
+        <!-- Linear Gradient Mask for Edge Fading -->
+        <div
+          class="relative w-full overflow-hidden group"
+          style="mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);"
+        >
           <div
-            class="flex gap-6 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap"
+            class="flex gap-6 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap py-2"
           >
             @for (product of marqueeProducts(); track $index) {
               <div
                 (click)="openProductModal(product)"
-                class="w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex gap-4 items-center shrink-0 cursor-pointer hover:border-emerald-500 transition-all shadow-xs"
+                class="w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-4 flex gap-4 items-center shrink-0 cursor-pointer hover:border-emerald-500 transition-all duration-300 hover:shadow-xl shadow-xs"
               >
                 <div
-                  class="w-20 h-20 bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden shrink-0"
+                  class="w-20 h-20 bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden shrink-0"
                 >
                   @if (getModalImages(product)[0]) {
                     <img
@@ -396,49 +456,90 @@ export interface BrandLogo {
         </div>
       </section>
 
-      <!-- FAQ Section -->
-      <section id="faq" class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white text-center mb-8">
-          Frequently Asked Questions
-        </h2>
+      <!-- REFINED PROFESSIONAL FAQ SECTION -->
+      <section id="faq" class="max-w-4xl mx-auto px-4 pt-4">
+        <div class="text-center mb-8">
+          <span
+            class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest"
+          >
+            Customer Care
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-slate-500 text-sm mt-1">
+            Everything you need to know about global dispatch, returns, and order tracking.
+          </p>
+        </div>
+
         <div class="space-y-4">
           <details
-            class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 cursor-pointer"
+            class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:shadow-md cursor-pointer [&_summary::-webkit-details-marker]:hidden"
           >
-            <summary class="font-bold text-slate-900 dark:text-white text-lg">
-              How long does shipping take?
+            <summary
+              class="flex justify-between items-center font-bold text-slate-900 dark:text-white text-base sm:text-lg"
+            >
+              <span>How long does global shipping take?</span>
+              <span
+                class="text-emerald-600 dark:text-emerald-400 font-black text-xl transition-transform duration-300 group-open:rotate-45"
+              >
+                +
+              </span>
             </summary>
-            <p class="text-sm text-slate-500 mt-2">
-              Standard fulfillment processes orders within 24-48 hours. Delivery averages 3-7
-              business days depending on location.
+            <p
+              class="text-sm text-slate-600 dark:text-slate-400 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 leading-relaxed"
+            >
+              Standard fulfillment processes orders within 24–48 hours. Express delivery averages
+              3–7 business days worldwide depending on destination customs clearance.
             </p>
           </details>
+
           <details
-            class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 cursor-pointer"
+            class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:shadow-md cursor-pointer [&_summary::-webkit-details-marker]:hidden"
           >
-            <summary class="font-bold text-slate-900 dark:text-white text-lg">
-              What is your return policy?
+            <summary
+              class="flex justify-between items-center font-bold text-slate-900 dark:text-white text-base sm:text-lg"
+            >
+              <span>What is your return policy?</span>
+              <span
+                class="text-emerald-600 dark:text-emerald-400 font-black text-xl transition-transform duration-300 group-open:rotate-45"
+              >
+                +
+              </span>
             </summary>
-            <p class="text-sm text-slate-500 mt-2">
-              We offer a 30-day return window on all unused hardware items in original packaging.
+            <p
+              class="text-sm text-slate-600 dark:text-slate-400 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 leading-relaxed"
+            >
+              We offer a full 30-day return window on all unused hardware items in their original
+              packaging. Return shipping labels can be requested directly from support.
             </p>
           </details>
+
           <details
-            class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 cursor-pointer"
+            class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:shadow-md cursor-pointer [&_summary::-webkit-details-marker]:hidden"
           >
-            <summary class="font-bold text-slate-900 dark:text-white text-lg">
-              How do I track my order?
+            <summary
+              class="flex justify-between items-center font-bold text-slate-900 dark:text-white text-base sm:text-lg"
+            >
+              <span>How do I track my order live?</span>
+              <span
+                class="text-emerald-600 dark:text-emerald-400 font-black text-xl transition-transform duration-300 group-open:rotate-45"
+              >
+                +
+              </span>
             </summary>
-            <p class="text-sm text-slate-500 mt-2">
-              Once dispatched, a tracking ID is generated and sent via email for live carrier status
-              monitoring.
+            <p
+              class="text-sm text-slate-600 dark:text-slate-400 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 leading-relaxed"
+            >
+              Once dispatched, a tracking ID is generated automatically and sent via email. You can
+              also monitor your live status anytime on our dedicated tracking page.
             </p>
           </details>
         </div>
       </section>
     </div>
 
-    <!-- PRODUCT SHOWCASE MULTI-MODAL -->
+    <!-- PRODUCT SHOWCASE MULTI-MODAL (FULLY PRESERVED) -->
     @if (selectedProduct()) {
       <div
         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-md animate-fadeIn"
@@ -678,20 +779,16 @@ export interface BrandLogo {
       .animate-shimmer {
         animation: shimmer 1.5s infinite;
       }
-
-      @keyframes marquee {
-        0% {
-          transform: translateX(0%);
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-        100% {
-          transform: translateX(-50%);
+        to {
+          opacity: 1;
         }
       }
-
-      .animate-marquee {
-        display: flex;
-        width: max-content;
-        animation: marquee 25s linear infinite;
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out forwards;
       }
     `,
   ],
@@ -716,7 +813,7 @@ export class HomeComponent implements OnInit {
   isModalAdding = signal<boolean>(false);
   isWishlisted = signal<boolean>(false);
 
-  // Top Selling Products Brand Logos Showcase
+  // Brand Logos Data
   public brandLogos: BrandLogo[] = [
     {
       name: 'Apple',
@@ -752,6 +849,10 @@ export class HomeComponent implements OnInit {
 
   topSellingProducts = computed(() => {
     return this.products().slice(0, 4);
+  });
+
+  sponsoredProducts = computed(() => {
+    return this.products().slice(4, 6);
   });
 
   activeModalImage = computed(() => {
@@ -821,7 +922,7 @@ export class HomeComponent implements OnInit {
   }
 
   getBrandName(product: any): string {
-    if (!product) return 'TechBytes';
+    if (!product) return 'DigiTex';
     if (product.vendor) return product.vendor;
 
     const title = (product.title || '').toLowerCase();
