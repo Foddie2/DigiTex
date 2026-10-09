@@ -37,7 +37,7 @@ import { AiChatbotService } from '../../core/services/ai-chatbot';
             Order Status & Live Tracking
           </h1>
           <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Real-time status synced directly with official Shopify fulfillment pipelines.
+            Real-time status synced directly with official our fulfillment pipelines.
           </p>
         </div>
 
@@ -106,7 +106,7 @@ import { AiChatbotService } from '../../core/services/ai-chatbot';
             class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"
           ></div>
           <p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-            Syncing live orders from Shopify...
+            Syncing live orders from our active store...
           </p>
         </div>
       }
@@ -266,7 +266,7 @@ import { AiChatbotService } from '../../core/services/ai-chatbot';
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white underline"
                   >
-                    <span>View Official Shopify Receipt</span>
+                    <span>View Official Our Store Receipt</span>
                     <span class="material-symbols-outlined text-[14px]">receipt_long</span>
                   </a>
                 }
