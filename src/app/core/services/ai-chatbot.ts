@@ -165,6 +165,11 @@ export class AiChatbotService {
       }, 14);
     });
   }
+  //
+  openWithPrompt(promptText: string): void {
+    this.isOpen.set(true);
+    this.sendMessage(promptText);
+  }
 
   private getFormattedTime(): string {
     return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
