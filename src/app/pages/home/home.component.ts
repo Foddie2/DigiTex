@@ -212,7 +212,7 @@ export interface BrandLogo {
                         {{ getBrandName(product) }}
                       </span>
                       <h4
-                        class="font-bold text-white text-sm truncate group-hover/sponsor:text-emerald-300 transition-colors"
+                        class="font-bold text-white text-sm truncate group-hover/sponsor:text-sky-300 transition-colors"
                       >
                         {{ product.title }}
                       </h4>
