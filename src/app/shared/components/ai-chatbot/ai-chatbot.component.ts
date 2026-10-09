@@ -15,7 +15,7 @@ import { AuthService } from '../../../core/services/auth';
       @if (!aiService.isOpen()) {
         <button
           (click)="aiService.toggleChat()"
-          class="relative bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
+          class="relative bg-linear-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform-gpu hover:scale-110 active:scale-95 cursor-pointer flex items-center justify-center group"
           aria-label="Open AI Shopping Assistant"
         >
           <span class="text-xl">✨</span>
@@ -27,11 +27,11 @@ import { AuthService } from '../../../core/services/auth';
         </button>
       } @else {
         <div
-          class="w-[90vw] sm:w-96 h-[560px] max-h-[82vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn"
+          class="w-[90vw] sm:w-96 h-140 max-h-[82vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn"
         >
           <!-- Header -->
           <div
-            class="p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white flex items-center justify-between border-b border-emerald-900/40"
+            class="p-4 bg-linear-to-r from-slate-900 via-emerald-950 to-slate-900 text-white flex items-center justify-between border-b border-emerald-900/40"
           >
             <div class="flex items-center gap-3">
               <div
@@ -116,7 +116,7 @@ import { AuthService } from '../../../core/services/auth';
 
                   @if (msg.leadCapture) {
                     <div
-                      class="bg-gradient-to-r from-emerald-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-emerald-500/30 space-y-2 mt-2"
+                      class="bg-linear-to-r from-emerald-900/40 to-indigo-900/40 p-2.5 rounded-xl border border-emerald-500/30 space-y-2 mt-2"
                     >
                       <p class="text-[10px] font-bold text-emerald-300">
                         Unlock 10% Off + M-Pesa Express Voucher:

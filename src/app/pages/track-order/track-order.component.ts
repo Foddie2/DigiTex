@@ -114,7 +114,7 @@ import { AiChatbotService } from '../../core/services/ai-chatbot';
       <!-- 3. LOGGED IN & EMPTY ORDERS STATE -->
       @if (authService.isLoggedIn() && !isLoading() && filteredOrders().length === 0) {
         <div
-          class="text-center py-20 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] space-y-4"
+          class="text-center py-20 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-4xl space-y-4"
         >
           <span class="text-5xl block">📦</span>
           <h3 class="text-xl font-bold text-slate-900 dark:text-white">No Orders Found</h3>
@@ -139,7 +139,7 @@ import { AiChatbotService } from '../../core/services/ai-chatbot';
         <div class="space-y-6">
           @for (order of filteredOrders(); track order.id) {
             <div
-              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md transition-all"
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-4xl overflow-hidden shadow-sm hover:shadow-md transition-all"
             >
               <!-- Order Header -->
               <div

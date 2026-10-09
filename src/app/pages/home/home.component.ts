@@ -119,7 +119,7 @@ export interface BrandLogo {
                         class="w-full h-48 bg-slate-200 dark:bg-slate-700/60 relative overflow-hidden"
                       >
                         <div
-                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 dark:via-slate-600/20 to-transparent animate-shimmer"
+                          class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 dark:via-slate-600/20 to-transparent animate-shimmer"
                         ></div>
                       </div>
                       <div class="p-4 space-y-2">
@@ -155,7 +155,7 @@ export interface BrandLogo {
       @if (!isLoading() && sponsoredProducts().length > 0) {
         <section class="max-w-7xl mx-auto px-4">
           <div
-            class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-950 border border-emerald-800/40 p-8 sm:p-12 shadow-2xl"
+            class="relative rounded-3xl overflow-hidden bg-linear-to-br from-slate-900 via-emerald-950 to-slate-950 border border-emerald-800/40 p-8 sm:p-12 shadow-2xl"
           >
             <div
               class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/20 blur-[100px] rounded-full pointer-events-none"
