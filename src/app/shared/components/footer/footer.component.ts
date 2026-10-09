@@ -98,7 +98,7 @@ import { RouterLink } from '@angular/router';
               class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm"
             >
               Your global destination for high-performance electronics, gaming gear, and mobile
-              accessories. Synced live via Shopify Storefront GraphQL APIs for instant dispatch.
+              accessories. Synced live via our Store APIs for instant dispatch.
             </p>
 
             <!-- Live Shopify API Status Indicator -->
@@ -272,10 +272,7 @@ import { RouterLink } from '@angular/router';
         <div
           class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 text-center md:text-left"
         >
-          <p>
-            © {{ currentYear }} DigiTex Store Inc. All rights reserved. Built on Shopify Storefront
-            API.
-          </p>
+          <p>© {{ currentYear }} DigiTex Store Inc. All rights reserved.</p>
 
           <!-- Payment Badges Pills -->
           <div

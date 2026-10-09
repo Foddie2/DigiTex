@@ -33,7 +33,7 @@ export class CookieConsentService {
   private platformId = inject(PLATFORM_ID);
 
   private readonly shopifyDomain = 'techbytesstore.myshopify.com';
-  private readonly storefrontAccessToken = 'YOUR_SHOPIFY_STOREFRONT_TOKEN';
+  private readonly storefrontAccessToken = 'ca62d02cc6eae47b692ef2bb7fab020e';
 
   showBanner = signal<boolean>(false);
   isLoaded = signal<boolean>(false);
